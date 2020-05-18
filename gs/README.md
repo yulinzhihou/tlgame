@@ -103,7 +103,9 @@ mkdir -p /home/billing && tar zxf billingSer.tar.gz -C /home/billing && chmod -R
 
 
 
-
+```
+docker stop tlbb_server_1 && docker rm tlbb_server_1 && docker stop tlbb_webdb_1 && docker rm tlbb_webdb_1 && docker stop tlbb_tlbbdb_1 && docker rm tlbb_tlbbdb_1 && rm -rf /tlgame/tlbb
+```
 
 
 
