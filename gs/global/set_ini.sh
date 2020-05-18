@@ -34,3 +34,4 @@ fi
 #复制到已经修改好的文件到指定容器
 \cp -rf /root/.tlgame/gs/scripts/*.ini /tlgame/tlbb/Server/Config/
 \cp -rf /root/.tlgame/gs/scripts/config.json /tlgame/billing/
+docker cp /root/.tlgame/gs/services/server/config/odbc.ini gs_server_1:/etc
