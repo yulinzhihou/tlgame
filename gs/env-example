@@ -74,8 +74,8 @@ RESTART=always
 #
 # tlbbdb数据库密码,会自动写入到配置文件中，等号后面请使用双引号包括密码字符串
 #
-TLBBDB_PASSWORD = "123456"
+TLBBDB_PASSWORD="123456"
 #
 # webdb数据库密码,会自动写入到配置文件中，等号后面请使用双引号包括密码字符串
 #
-WEBDB_PASSWORD = "123456"
+WEBDB_PASSWORD="123456"
