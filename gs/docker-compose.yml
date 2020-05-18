@@ -90,7 +90,7 @@ services:
       - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
       - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
       - ${PHP_LOG_DIR}:/var/log/php
-      - ${DATA_DIR}/composer:/tmp/composer
+      - ${SHARED_DIR}/composer:/tmp/composer
     restart: ${RESTART}
     cap_add:
       - SYS_PTRACE

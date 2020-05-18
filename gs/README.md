@@ -51,7 +51,7 @@ sudo yum makecache fast && sudo yum -y install docker-ce docker-compose && syste
 
 ```bash
 sudo mkdir -p /etc/docker
-sudo tee /etc/docker/daemon.json <<-'EOF'
+sudo tee /etc/docker/daemon.json << EOF
 {
   "registry-mirrors": ["https://f0tv1cst.mirror.aliyuncs.com"]
 }
@@ -96,6 +96,10 @@ cd ~/tlsf/scripts && ./ssh-server.sh
 mkdir -p /home/billing && tar zxf billingSer.tar.gz -C /home/billing && chmod -R 777 /home && chown -R root:root /home && rm -rf /home/billingSer.tar.gz
 ```
 
+
+
+
+
 - 删除所有运行的容器
 
 ```bash
@@ -116,8 +120,6 @@ docker rmi $(docker images -q)
 ### 三、安装步骤（客户端）
 
 
-
-- 
 
 
 
