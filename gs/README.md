@@ -41,64 +41,30 @@ cd ~/.tlgame/gs && cp env-example .env
 bash ~/.tlgame/gs/install.sh
 ```
 
-- 更新并安装 `Docker-CE`
+- 上传服务端到 `/root` 下
 
 ```bash
-sudo yum makecache fast && sudo yum -y install docker-ce docker-compose && systemctl enable docker && sudo systemctl start docker 
+up
 ```
 
-- 配置 `Docker-CE` ,并重启服务器，等待服务器重启完成之后，配置 `TL` 的服务端环境
+- 解压上传的服务端
 
 ```bash
-sudo mkdir -p /etc/docker
-sudo tee /etc/docker/daemon.json << EOF
-{
-  "registry-mirrors": ["https://f0tv1cst.mirror.aliyuncs.com"]
-}
-EOF
-sudo systemctl daemon-reload && sudo systemctl restart docker && sudo reboot
+un_tar
 ```
 
-- 重启服务器完成后，下载环境配置源代码。
+- 设置配置文件
 
 ```bash
-cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git  && chmod -R 777 ~/tlgame && cd ~/tlgame && cp env-example .env
+set_ini
 ```
 
-- 执行部署命令,一键安装环境，等待10-20分钟左右，出现
+- 开撸
   
 
 ```bash
-docker-compose up -d
+run_tlbb
 ```
-
-- 复制相关配置文件从主机到docker容器里面
-
-```bash
-docker cp tlbb.tar.gz tlsf_server_1:/home
-cd ~/tlsf/scripts && ./ssh-server.sh
-cd /home && tar zxf tlbb.tar.gz -C /home && rm -rf /home/tlbb.tar.gz
-```
-
-- 
-
-```bash
-cd ~/tlsf/scripts && ./modify_ini_config.sh
-cd ~/tlsf/scripts && ./ssh-server.sh
-cd /home && tar zxf ini.tar.gz -C /home/tlbb/Server/Config && chmod -R 777 /home && chown -R root:root /home && rm -rf /home/ini.tar.gz
-```
-
-- 
-
-```bash
-docker cp billingSer.tar.gz tlsf_server_1:/home
-cd ~/tlsf/scripts && ./ssh-server.sh
-mkdir -p /home/billing && tar zxf billingSer.tar.gz -C /home/billing && chmod -R 777 /home && chown -R root:root /home && rm -rf /home/billingSer.tar.gz
-```
-
-
-
-
 
 - 删除所有运行的容器
 

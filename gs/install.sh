@@ -21,6 +21,9 @@ set_clock(){
 # 更新系统组件与安装必要的安装包
 update_install_plugins() {
     rm -f /var/run/yum.pid
+    mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
+    mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
+    wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
     PLUGINS="epel-release yum-utils wget git vim zip unzip zlib zlib-devel freetype freetype-devel lsof pcre pcre-devel vixie-cron crontabs"
     yum -y install ${PLUGINS} && yum -y update
 }
