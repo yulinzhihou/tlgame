@@ -7,6 +7,10 @@
 #tar zxf /.tlgame/gs/scripts/ini.tar.gz -C /tlgame/tlbb/Server/Config && chmod -R 777 /tlgame && chown -R root:root /tlgame
 tar zxf /root/.tlgame/gs/scripts/ini.tar.gz -C /root/.tlgame/gs/scripts/
 tar zxf /root/.tlgame/gs/scripts/billing.tar.gz -C /root/.tlgame/gs/scripts/
+if [ ! -d "/tlgame/billing/" ]; then
+    mkdir -p /tlgame/billing/
+fi
+tar zxf /root/.tlgame/gs/scripts/billing.tar.gz -C /tlgame/billing/
 
 # 游戏配置文件
 if [ -n $TLBBDB_PASSWORD ] || [ $TLBBDB_PASSWORD -ne '123456' ]; then
