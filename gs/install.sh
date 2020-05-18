@@ -63,11 +63,18 @@ github_user_content(){
     #fi
     echo "${IP_STR}  raw.githubusercontent.com"
 }
+
+# 启动环境
+docker_run () {
+    cd ~/.tlgame/gs && docker-compose up -d
+}
+
 # 执行操作
 set_clock
 update_install_plugins
 docker_ce
 set_command
+docker_run
 
 echo "====================================="
 echo -e "\033[32mThe install successful!\033[0m"

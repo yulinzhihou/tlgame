@@ -30,7 +30,7 @@ sudo yum -y update && yum install -y epel-release yum-utils wget git vim && \
 cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git .tlgame
 ```
 
-- 下载完之后项目，进入相应目录。
+- 下载完之后项目，进入相应目录。(**注：如果需要配置参数，请在下面命令执行前，修改好 `env_example.env` ,具体修改方法，自行百度，方法很多，不会的单独出视频教程，否则使用默认**)
 
 ```bash
 cd ~/.tlgame/gs && cp env-example .env
