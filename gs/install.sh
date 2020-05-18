@@ -21,7 +21,7 @@ set_clock(){
 # 更新系统组件与安装必要的安装包
 update_install_plugins() {
     rm -f /var/run/yum.pid
-    PLUGINS="epel-release yum-utils device-mapper-persistent-data lvm2 wget git vim python-devel python-imaging zip unzip openssl openssl-devel gcc libxml2 libxml2-dev libxslt* zlib zlib-devel libjpeg-devel libpng-devel libwebp libwebp-devel freetype freetype-devel lsof pcre pcre-devel vixie-cron crontabs"
+    PLUGINS="epel-release yum-utils wget git vim zip unzip zlib zlib-devel freetype freetype-devel lsof pcre pcre-devel vixie-cron crontabs"
     yum -y install ${PLUGINS} && yum -y update
 }
 

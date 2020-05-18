@@ -23,22 +23,22 @@
 
 ### 二、安装步骤（服务端）
 
-- 关闭服务器防火墙和 `SELINUX` 
+- 下载部署环境的项目，使用 `root` 用户登录。否则可能会出现报错
 
 ```bash
-systemctl stop firewalld && systemctl disable firewalld && sed -i 's#SELINUX=enforcing#SELINUX=disabled#g' /etc/selinux/config
+cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git .tlgame
 ```
 
-- 更新系统软件库并安装相应软件，安装软件更新完成后会重启服务器。
+- 下载完之后项目，进入相应目录。
 
 ```bash
-sudo yum -y update && yum install -y epel-release yum-utils device-mapper-persistent-data lvm2 wget git vim
+cd ~/.tlgame/gs && cp env-example .env
 ```
 
-- 添加软件源信息
+- 进行 `install.sh` 脚本安装环境
 
 ```bash
-sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+bash ~/.tlgame/gs/install.sh
 ```
 
 - 更新并安装 `Docker-CE`
