@@ -33,3 +33,17 @@
 #sed -i 's/sleep=60/sleep=99999999/g' /TLsf/workspace/tlbb/run.sh
 #yum -y install dos2unix && dos2unix /TLsf/workspace/tlbb/Server/Config/ShareMemInfo.ini && dos2unix /TLsf/workspace/tlbb/Server/Config/LoginInfo.ini
 tar zxf ini.tar.gz -C /tlgame/tlbb/Server/Config && chmod -R 777 /tlgame/ && chown -R root:root /tlgame/
+
+# 数据库密码
+sed -i "s/DBPassword=123456/DBPassword=${TLBBDB_PASSWORD}/g" LoginInfo.ini
+sed -i "s/DBPort=3306/DBPort=${TLBB_MYSQL_PORT}/g" LoginInfo.ini
+# 换游戏端口和网关端口
+sed -i "s/Port0=13580/Port0=${LOGIN_PORT}/g" ServerInfo.ini
+sed -i "s/Port0=15680/Port0=${SERVER_PORT}/g" ServerInfo.ini
+# 修改share配置
+sed -i "s/DBPort=3306/DBPassword=${TLBB_MYSQL_PORT}/g" ShareMemInfo.ini
+sed -i "s/DBPassword=123456/DBPassword=${TLBBDB_PASSWORD}/g" ShareMemInfo.ini
+# 配置BILLING
+sed -i "s/3306/${WEB_MYSQL_PORT}/g" config.json
+sed -i "s/123456/${WEBDB_PASSWORD}/g" config.json
+
