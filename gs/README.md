@@ -1,3 +1,5 @@
+
+
 ## 全新手工架设环境开服食用指南
 
 ### 告别虚拟机开服🎉，告别win机装虚拟机开服🎉，告别win机+Linux机开服🎉。没错你没听错🎉，只需要一个Linux机就可以开服。市面上最小开服的配置机器即可开服🎉。技术交流群：826717146，访问我的[论坛](https://gsgameshare.com)
@@ -94,6 +96,20 @@ cd ~/tlsf/scripts && ./ssh-server.sh
 mkdir -p /home/billing && tar zxf billingSer.tar.gz -C /home/billing && chmod -R 777 /home && chown -R root:root /home && rm -rf /home/billingSer.tar.gz
 ```
 
+- 删除所有运行的容器
+
+```bash
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
+```
+
+- 删除所有镜像
+
+```bash
+docker rmi $(docker images -q)
+```
+
+
+
 
 
 
@@ -101,15 +117,7 @@ mkdir -p /home/billing && tar zxf billingSer.tar.gz -C /home/billing && chmod -R
 
 
 
-
-
-```
-docker stop tlbb_server_1 && docker rm tlbb_server_1 && docker stop tlbb_webdb_1 && docker rm tlbb_webdb_1 && docker stop tlbb_tlbbdb_1 && docker rm tlbb_tlbbdb_1 && rm -rf /tlgame/tlbb
-```
-
-
-
-
+- 
 
 
 
