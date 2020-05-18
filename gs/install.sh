@@ -20,6 +20,7 @@ set_clock(){
 
 # 更新系统组件与安装必要的安装包
 update_install_plugins() {
+    yum makecache
     rm -f /var/run/yum.pid
     mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
     mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
