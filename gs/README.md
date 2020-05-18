@@ -1,8 +1,149 @@
 ## 全新手工架设环境开服食用指南
 
-### 告别虚拟机开服🎉，告别win机装虚拟机开服🎉，告别win机+Linux机开服🎉。没错你没听错🎉，只需要一个Linux机就可以开服。市面上最小开服的配置机器即可开服🎉。
+### 告别虚拟机开服🎉，告别win机装虚拟机开服🎉，告别win机+Linux机开服🎉。没错你没听错🎉，只需要一个Linux机就可以开服。市面上最小开服的配置机器即可开服🎉。技术交流群：826717146，访问我的[论坛](https://gsgameshare.com)
 
-### 唯一群号：826717146，或者访问我的[博客](https://gsgameshare.com)
+
+
+## 以下是手动配置云服务器环境详细配置手册
+
+- 暂时只支持云服务器 `CentOS 7.0` 及以上版本的64位系统。实测1H1G1M可以正常使用
+
+- 本教程支持各种云服务器，只要能装 `CentOS7.0` 及以上64位系统即可
+- 同时你觉得用得好，请给我一杯咖啡的打赏，以便我为大家更新更多方便的工具
+- 本操作手册仅供学习使用，请勿用于商业用途。如有侵权，请与本人联系
+
+### 一、前期准备
+
+- 购买某云服务器，也可以使用本人的优惠券。[腾讯云](https://url.cn/gWNWl5N8)， [阿里云](https://www.aliyun.com/minisite/goods?userCode=buoewrk0)
+
+- 安装好 `CentOS7` 最新版本64位系统
+- 关闭防火墙，开放指定端口 `33060` `33061` `13580` `15680` ,或者全部开放也可以。
+
+### 二、安装步骤（服务端）
+
+- 关闭服务器防火墙和 `SELINUX` 
+
+```bash
+systemctl stop firewalld && systemctl disable firewalld && sed -i 's#SELINUX=enforcing#SELINUX=disabled#g' /etc/selinux/config
+```
+
+- 更新系统软件库并安装相应软件，安装软件更新完成后会重启服务器。
+
+```bash
+sudo yum -y update && yum install -y epel-release yum-utils device-mapper-persistent-data lvm2 wget git vim
+```
+
+- 添加软件源信息
+
+```bash
+sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+
+- 更新并安装 `Docker-CE`
+
+```bash
+sudo yum makecache fast && sudo yum -y install docker-ce docker-compose && systemctl enable docker && sudo systemctl start docker 
+```
+
+- 配置 `Docker-CE` ,并重启服务器，等待服务器重启完成之后，配置 `TL` 的服务端环境
+
+```bash
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://f0tv1cst.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload && sudo systemctl restart docker && sudo reboot
+```
+
+- 重启服务器完成后，下载环境配置源代码。
+
+```bash
+cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git  && chmod -R 777 ~/tlgame && cd ~/tlgame && cp env-example .env
+```
+
+- 执行部署命令,一键安装环境，等待10-20分钟左右，出现
+  
+
+```bash
+docker-compose up -d
+```
+
+- 复制相关配置文件从主机到docker容器里面
+
+```bash
+docker cp tlbb.tar.gz tlsf_server_1:/home
+cd ~/tlsf/scripts && ./ssh-server.sh
+cd /home && tar zxf tlbb.tar.gz -C /home && rm -rf /home/tlbb.tar.gz
+```
+
+- 
+
+```bash
+cd ~/tlsf/scripts && ./modify_ini_config.sh
+cd ~/tlsf/scripts && ./ssh-server.sh
+cd /home && tar zxf ini.tar.gz -C /home/tlbb/Server/Config && chmod -R 777 /home && chown -R root:root /home && rm -rf /home/ini.tar.gz
+```
+
+- 
+
+```bash
+docker cp billingSer.tar.gz tlsf_server_1:/home
+cd ~/tlsf/scripts && ./ssh-server.sh
+mkdir -p /home/billing && tar zxf billingSer.tar.gz -C /home/billing && chmod -R 777 /home && chown -R root:root /home && rm -rf /home/billingSer.tar.gz
+```
+
+
+
+
+### 三、安装步骤（客户端）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - #### 第一步：服务端配置，虚拟机开机，使用`xshell` 软件连接进虚拟机系统
 

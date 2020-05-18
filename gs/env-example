@@ -1,0 +1,99 @@
+###################################
+# Path shared in host OS
+#
+# Window Host OS:
+# (+) Docker ToolBox:
+# Settings of docker-machine VirtualBox Image (default) -> Shared Folders
+# -> Add -> Host OS Path -> DockerTLBB -> Auto-mount -> OK
+# The env will be:
+# SHARED_DIR=/tlgame
+#
+# Linux Host OS:
+# SHARED_DIR=.
+#
+###################################
+SHARED_DIR=/tlgame
+
+#
+# PHP 源目录
+#
+SOURCE_DIR=./www
+
+#
+# 数据运行目录
+#
+DATA_DIR=./data
+
+#
+# 容器机器时区
+TZ=Asia/Shanghai
+
+#
+# 容器安装包链接
+CONTAINER_PACKAGE_URL=mirrors.aliyun.com
+
+#
+# PHP7
+# 可使用的PHP拓展
+# pdo_mysql,zip,pcntl,mysqli,mbstring,exif,bcmath,calendar,
+# sockets,gettext,shmop,sysvmsg,sysvsem,sysvshm,pdo_rebird,
+# pdo_dblib,pdo_oci,pdo_odbc,pdo_pgsql,pgsql,oci8,odbc,dba,
+# gd,intl,bz2,soap,xsl,xmlrpc,wddx,curl,readline,snmp,pspell,
+# recode,tidy,gmp,imap,ldap,imagick,sqlsrv,mcrypt,opcache,
+# redis,memcached,xdebug,swoole,pdo_sqlsrv,sodium,yaf,mysql,
+# amqp,mongodb,event,rar,ast,yac,yar,yaconf,msgpack,igbinary,
+# seaslog,varnish,xhprof,xlswriter,memcache,rdkafka,zookeeper
+# 如果需要安装，复制到下面项目里面。
+#
+PHP_VERSION=7.4.1
+PHP_PHP_CONF_FILE=./services/php/php.ini
+PHP_FPM_CONF_FILE=./services/php/php-fpm.conf
+PHP_LOG_DIR=./logs/php
+PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache
+
+
+#
+# Nginx 服务器配置
+#
+NGINX_VERSION=1.15.7-alpine
+NGINX_HTTP_HOST_PORT=80
+NGINX_HTTPS_HOST_PORT=443
+NGINX_CONFD_DIR=./services/nginx/conf.d
+NGINX_CONF_FILE=./services/nginx/nginx.conf
+NGINX_FASTCGI_PHP_CONF=./services/nginx/fastcgi-php.conf
+NGINX_FASTCGI_PARAMS=./services/nginx/fastcgi_params
+NGINX_SSL_CERTIFICATE_DIR=./services/nginx/ssl
+NGINX_LOG_DIR=./logs/nginx
+# Available apps: certbot
+NGINX_INSTALL_APPS=
+
+# 登录网关端口转发：ServerInfo.ini > [Server1] > PORT0
+LOGIN_PORT=13580
+
+# 游戏端口转发：ServerInfo.ini > [Server0] > PORT0
+SERVER_PORT=15680
+
+#
+# 云服务器数据库端口
+HOST_MYSQL_PORT=3306
+
+#
+# 账号数据库端口，请使用非3306的端口
+WEB_MYSQL_PORT=33060
+#
+# 游戏数据库端口，请使用非3306的端口
+TLBB_MYSQL_PORT=33061
+
+#
+# 容器服务重启方式
+RESTART=always
+
+#
+# tlbbdb数据库密码
+#
+TLBBDB_PASSWORD = 123456
+
+#
+# webdb数据库密码
+#
+WEBDB_PASSWORD = 123456

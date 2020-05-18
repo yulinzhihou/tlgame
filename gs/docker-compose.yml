@@ -1,0 +1,98 @@
+version: '3'
+
+services:
+  # Game server
+  server:
+    build:
+      context: ./services/server
+      dockerfile: Dockerfile
+    image: registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_gs:v0.1
+    volumes:
+      - "${SHARED_DIR}/:/home"
+    ports:
+      - "${LOGIN_PORT}:${LOGIN_PORT}"
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    restart: ${RESTART}
+    links:
+      - tlbbdb
+      - webdb
+
+  # Game database
+  tlbbdb:
+    build:
+      context: ./services/tlbbdb
+    image: registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_tlbbdbserver:v0.1
+    volumes:
+      - "${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql"
+    ports:
+      - "${TLBB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "tlbbdb"
+    restart: ${RESTART}
+
+  # Web database
+  webdb:
+    build:
+      context: ./services/webdb
+    image: registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_webdbserver:v0.1
+    volumes:
+    - "${SHARED_DIR}/webdb/mysql:/var/lib/mysql"
+    ports:
+    - "${WEB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "web"
+    restart: ${RESTART}
+
+  nginx:
+    build:
+      context: ./services/nginx
+      args:
+        NGINX_VERSION: ${NGINX_VERSION}
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        NGINX_INSTALL_APPS: ${NGINX_INSTALL_APPS}
+    container_name: nginx
+    ports:
+      - "${NGINX_HTTP_HOST_PORT}:80"
+      - "${NGINX_HTTPS_HOST_PORT}:443"
+    volumes:
+      - ${SOURCE_DIR}:/www/:rw
+      - ${NGINX_SSL_CERTIFICATE_DIR}:/ssl:rw
+      - ${NGINX_CONFD_DIR}:/etc/nginx/conf.d/:rw
+      - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
+      - ${NGINX_FASTCGI_PHP_CONF}:/etc/nginx/fastcgi-php.conf:ro
+      - ${NGINX_FASTCGI_PARAMS}:/etc/nginx/fastcgi_params:ro
+      - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
+    environment:
+      TZ: "$TZ"
+    restart: ${RESTART}
+    networks:
+      - default
+
+  php:
+    build:
+      context: ./services/php
+      args:
+        PHP_VERSION: php:${PHP_VERSION}-fpm-alpine
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        PHP_EXTENSIONS: ${PHP_EXTENSIONS}
+        TZ: "$TZ"
+    container_name: php
+    expose:
+      - 9501
+    extra_hosts:
+      - "www.site1.com:172.17.0.1"
+    volumes:
+      - ${SOURCE_DIR}:/www/:rw
+      - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP_LOG_DIR}:/var/log/php
+      - ${DATA_DIR}/composer:/tmp/composer
+    restart: ${RESTART}
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
