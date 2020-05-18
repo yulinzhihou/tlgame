@@ -26,6 +26,7 @@
 - 下载部署环境的项目，使用 `root` 用户登录。否则可能会出现报错
 
 ```bash
+sudo yum -y update && yum install -y epel-release yum-utils wget git vim && \
 cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git .tlgame
 ```
 
@@ -44,7 +45,7 @@ bash ~/.tlgame/gs/install.sh
 - 上传服务端到 `/root` 下
 
 ```bash
-up
+put
 ```
 
 - 解压上传的服务端
