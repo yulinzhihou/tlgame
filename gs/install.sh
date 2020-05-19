@@ -20,13 +20,13 @@ set_clock(){
 
 # 更新系统组件与安装必要的安装包
 update_install_plugins() {
-    yum makecache
     rm -f /var/run/yum.pid
     mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
     mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
     wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
     mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
     wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+    yum makecache
     PLUGINS="epel-release yum-utils wget git vim zip unzip zlib zlib-devel freetype freetype-devel lsof pcre pcre-devel vixie-cron crontabs"
     yum -y install ${PLUGINS} && yum -y update
 }
@@ -78,16 +78,16 @@ set_command
 docker_run
 
 echo "====================================="
-echo -e "\033[32mThe install successful!\033[0m"
+echo -e "\033[32m Tlgame 环境安装成功!\033[0m"
 echo -e "====================================="
-echo -e "网站目录: /tlgame/www/localhost"
 echo -e "账号数据库端口: 33060"
 echo -e "游戏数据库端口: 33061"
 echo -e "登录网关端口: 13580"
 echo -e "游戏网关端口: 15680"
 echo -e "账号数据库密码: 123456"
 echo -e "游戏数据库密码: 123456"
+echo -e "网站把域名解析到云服务器IP上，然后把网站文件放到 /tlgame/www/localhost 目录里面即可访问。"
 echo -e "====================================="
 endTime=`date +%s`
 ((outTime=($endTime-$startTime)/60))
-echo -e "Time consuming:\033[32m $outTime \033[0mMinute!"
+echo -e "总耗时:\033[32m $outTime \033[0m 分钟!"
