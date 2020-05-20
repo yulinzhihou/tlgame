@@ -89,11 +89,20 @@ remove
 ```
 
 
-
-
-
-
 ### 三、安装步骤（客户端）
+
+- 安装最新官方[客户端](http://tl.changyou.com/download/index.shtml) ,或者下载指定版本的[客户端](http://shang.qq.com/wpa/qunwpa?idkey=a67f7a7ee8d6fb3266b945d1ec512f31a374dcb74c863ead2d73029f5050576f) （进技术交流群获取）
+
+- 解压补丁包
+- 更新补丁，
+- 配置单机测试使用的登录器
+- 联网登录器。
+
+
+
+### 四、网站配置（服务端）
+
+
 
 
 
