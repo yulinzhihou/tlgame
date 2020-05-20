@@ -35,4 +35,8 @@ fi
 #复制到已经修改好的文件到指定容器
 \cp -rf /root/.tlgame/gs/scripts/*.ini /tlgame/tlbb/Server/Config/
 \cp -rf /root/.tlgame/gs/scripts/config.json /tlgame/billing/
+dos2unix /root/.tlgame/gs/scripts/LoginInfo.ini
+dos2unix /root/.tlgame/gs/scripts/ShareMemInfo.ini
+dos2unix /root/.tlgame/gs/scripts/ServerInfo.ini
+dos2unix /root/.tlgame/gs/services/server/config/odbc.ini
 docker cp /root/.tlgame/gs/services/server/config/odbc.ini gs_server_1:/etc

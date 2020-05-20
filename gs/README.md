@@ -26,7 +26,7 @@
 - 下载部署环境的项目，使用 `root` 用户登录。否则可能会出现报错
 
 ```bash
-yum install -y git && cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git .tlgame
+yum install -y wget git && cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git .tlgame
 ```
 
 - 下载完之后项目，进入相应目录。(**注：如果需要配置参数，请在下面命令执行前，修改好 `env_example` ,具体修改方法，自行百度，方法很多，不会的单独出视频教程，否则使用默认**)
@@ -44,44 +44,48 @@ bash ~/.tlgame/gs/install.sh
 - 上传服务端到 `/root` 下，点击 `xshell` 软件的 `sftp` 按钮，进行 `sftp` 命令行传输模式**（注：用 `winscp` 软件或者其他上传软件都行，只要把服务端上传到 `/root` 目录下即可，服务端的名称只能是  `tlbb.tar.gz` 或者 `tlbb.zip` 否则后面的操作会报错）**
 
 ```bash
-put 
+cd ~
+```
+
+```BASH
+put
 ```
 
 - 解压上传的服务端 **（不需要考虑是哪种格式，使用此命令即可完成解压操作）**
 
 ```bash
-un_tar
+untar
 ```
 
 - 设置配置文件**（将配置文件进行覆盖，此配置文件会按照 `env-example` 文件里面定义的进行替换，没有更改的话则使用默认值）**
 
 ```bash
-set_ini
+setini
 ```
 
 - 开启服务端，等待结果
   
 
 ```bash
-run_tlbb
+runtlbb
 ```
 
 - 使用命令查看服务端运行状态
 
 ```bash
-run_top
+runtop
 ```
 
-- 删除所有运行的容器
+- 删除当前环境与游戏。（用于换端）
 
 ```bash
-docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
+rebuild
 ```
 
-- 删除所有镜像
+- 删除所有数据与镜像文件
 
 ```bash
-docker rmi $(docker images -q)
+remove
 ```
 
 
