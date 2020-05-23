@@ -22,7 +22,7 @@ elif [ -n $WEBDB_PASSWORD ] && [ $WEBDB_PASSWORD -ne '123456' ]; then
     sed -i "s/123456/${WEBDB_PASSWORD}/g" /root/.tlgame/gs/scripts/config.json
 elif [ -n $TLBB_MYSQL_PORT ] && [ $TLBB_MYSQL_PORT -ne '3306' ]; then
     sed -i "s/DBPort=3306/DBPort=${TLBB_MYSQL_PORT}/g" /root/.tlgame/gs/scripts/LoginInfo.ini
-    sed -i "s/DBPort=3306/DBPassword=${TLBB_MYSQL_PORT}/g" /root/.tlgame/gs/scripts/ShareMemInfo.ini
+    sed -i "s/DBPort=3306/DBPort=${TLBB_MYSQL_PORT}/g" /root/.tlgame/gs/scripts/ShareMemInfo.ini
     sed -i "s/3306/${TLBB_MYSQL_PORT}/g" /root/.tlgame/gs/services/server/config/odbc.ini
 elif [ -n $WEB_MYSQL_PORT ] && [ $WEB_MYSQL_PORT -ne '3306' ]; then
     sed -i "s/3306/${WEB_MYSQL_PORT}/g" /root/.tlgame/gs/scripts/config.json
