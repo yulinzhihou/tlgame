@@ -23,6 +23,17 @@
 
 ### 二、安装步骤（服务端）
 
+- 如果小服务器配置，如`1G` `2G` 内存的，需要拓展一下虚拟内存，才能流畅跑起服务端
+
+```BASH
+# 后面的count=40，表示增加4G。这里也不要过多的增加。因为你内存有1G，增加4G就有5G了。
+mkdir -p /usr/swap && dd if=/dev/zero of=/usr/swap/swapfile bs=100M count=40
+mkswap /usr/swap/swapfile && \
+chmod -R 600 /usr/swap/swapfile && swapon /usr/swap/swapfile
+```
+
+
+
 - 下载部署环境的项目，使用 `root` 用户登录。否则可能会出现报错
 
 ```bash
@@ -101,16 +112,6 @@ remove
 
 
 ### 四、网站配置（服务端）
-
-
-
-
-
-
-
-
-
-
 
 
 
