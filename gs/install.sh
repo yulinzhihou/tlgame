@@ -72,7 +72,6 @@ docker_run () {
 # 执行操作
 set_clock
 update_install_plugins
-source ~/.tlgame/gs/scripts/envfile.sh
 docker_ce
 set_command
 docker_run
