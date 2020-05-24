@@ -1,14 +1,22 @@
 #!/usr/bin/env bash
 STEP=$1
 case $1 in
-    1)
+    'billing')
+    cd /home/billing/ && ./billing &
    ;;
-   2)
+   'shm')
+   cd /home/tlbb/Server && ./shm start
    ;;
-   3)
+   'login')
+   cd /home/tlbb/Server && ./Login
    ;;
-    4)
+    'world')
+    cd /home/tlbb/Server && ./World
    ;;
-    5)
+    'server')
+    cd /home/tlbb/Server && ./Server
+   ;;
+    *)
+    echo "你输入的参数有问题！！"
    ;;
 esac
