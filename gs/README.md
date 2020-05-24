@@ -36,7 +36,7 @@ yum install -y wget git vim && cd ~ && git clone https://gitee.com/yulinzhihou/t
 cd ~/.tlgame/gs && cp env-example .env
 ```
 
-- 进行 `install.sh` 脚本安装环境
+- 进行 `install.sh` 脚本安装环境，**（注：在运行安装命令前，必须确认你需要改的端口，密码都改了。不然一旦安装完成，再改就不会生效了）**
 
 ```bash
 bash ~/.tlgame/gs/install.sh

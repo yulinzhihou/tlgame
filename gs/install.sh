@@ -64,10 +64,6 @@ set_command() {
 #    #fi
 #    echo "${IP_STR}  raw.githubusercontent.com"
 #}
-#配置参数
-set_ini() {
-    cd ~/.tlgame/gs && export $(grep -v '^#' /root/.tlgame/gs/.env | xargs -d '\n')
-}
 # 启动环境
 docker_run () {
     cd ~/.tlgame/gs && docker-compose up -d
@@ -76,7 +72,7 @@ docker_run () {
 # 执行操作
 set_clock
 update_install_plugins
-set_ini
+source ~/.tlgame/gs/scripts/envfile.sh
 docker_ce
 set_command
 docker_run
