@@ -27,7 +27,7 @@ services:
     ports:
       - "${TLBB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
     environment:
-      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ROOT_PASSWORD: ${TLBBDB_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "tlbbdb"
     restart: ${RESTART}
@@ -42,7 +42,7 @@ services:
     ports:
     - "${WEB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
     environment:
-      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ROOT_PASSWORD: ${WEBDB_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "web"
     restart: ${RESTART}
