@@ -42,6 +42,12 @@ if [ $SERVER_PORT -ne 15680 ]; then
     sed -i "s/Port0=15680/Port0=${SERVER_PORT}/g" /root/.tlgame/gs/scripts/ServerInfo.ini
 fi
 
+echo -e "export WEB_MYSQL_PORT=`[ ! -z ${WEB_MYSQL_PORT} ] && echo ${WEB_MYSQL_PORT} || echo 33060`" > /tmp/pass.txt
+echo -e "export TLBB_MYSQL_PORT=`[ ! -z ${TLBB_MYSQL_PORT} ] && echo ${TLBB_MYSQL_PORT} || echo 33061`" >> /tmp/pass.txt
+echo -e "export LOGIN_PORT=`[ ! -z ${LOGIN_PORT} ] && echo ${LOGIN_PORT} || echo 13580`" >> /tmp/pass.txt
+echo -e "export SERVER_PORT=`[ ! -z ${SERVER_PORT} ] && echo ${SERVER_PORT} || echo 15680`" >> /tmp/pass.txt
+echo -e "export WEBDB_PASSWORD=`[ ! -z ${WEBDB_PASSWORD} ] && echo ${WEBDB_PASSWORD} || echo 123456`" >> /tmp/pass.txt
+echo -e "export TLBBDB_PASSWORD=`[ ! -z ${TLBBDB_PASSWORD} ] && echo ${TLBBDB_PASSWORD} || echo 123456`" >> /tmp/pass.txt
 #复制到已经修改好的文件到指定容器
 \cp -rf /root/.tlgame/gs/scripts/*.ini /tlgame/tlbb/Server/Config/
 \cp -rf /root/.tlgame/gs/scripts/config.json /tlgame/billing/
@@ -51,3 +57,4 @@ cd ~/.tlgame/ && \
 git checkout -- gs/services/server/config/odbc.ini && \
 rm -rf  /root/.tlgame/gs/scripts/*.ini && \
 rm -rf  /root/.tlgame/gs/scripts/config.json
+cat /tmp/pass.txt >> /etc/profile && rm -rf /tmp/pass.txt

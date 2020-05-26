@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# 后期添加命令操作
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+
+root_need(){
+    if [[ ${EUID} -ne 0 ]]; then
+        echo -e "\033[31mError:\033[0m This script must be run as root" 1>&2
+        exit 1
+    fi
+}
+
+display_usage(){
+printf "
+
+Usage: `basename $0` [ show ]
+show    展示配置信息的详细情况，端口号，密码等
+
+"
+}
+
+gs(){
+    local action=$1
+    case ${action} in
+        show ) show;;
+#        list ) vhost_list;;
+#        del ) vhost_del;;
+        *) echo "action ${action} not found";exit 1;;
+    esac
+}
+
+
+show() {
+    echo "====================================="
+    echo -e "\033[32m Tlgame 环境安装成功!\033[0m"
+    echo -e "====================================="
+    echo -e "账号数据库端口: `[ ! -z ${WEB_MYSQL_PORT} ] && echo ${WEB_MYSQL_PORT} || echo 33060`"
+    echo -e "游戏数据库端口: `[ ! -z ${TLBB_MYSQL_PORT} ] && echo ${TLBB_MYSQL_PORT} || echo 33061`"
+    echo -e "登录网关端口: `[ ! -z ${LOGIN_PORT} ] && echo ${LOGIN_PORT} || echo 13580`"
+    echo -e "游戏网关端口: `[ ! -z ${SERVER_PORT} ] && echo ${SERVER_PORT} || echo 15680`"
+    echo -e "账号数据库密码: `[ ! -z ${WEBDB_PASSWORD} ] && echo ${WEBDB_PASSWORD} || echo 123456`"
+    echo -e "游戏数据库密码: `[ ! -z ${TLBBDB_PASSWORD} ] && echo ${TLBBDB_PASSWORD} || echo 123456`"
+    echo -e "网站把域名解析到云服务器IP上，然后把网站文件放到 /tlgame/www/localhost 目录里面即可访问。"
+    echo -e "====================================="
+}
+
+#Run it
+root_need
+if [ $# -ne 1 ]; then
+    display_usage
+    exit 1
+fi
+
+action=$1
+case ${action} in
+    add)  gs ${action} ;;
+#    list) vhost ${action} ;;
+#    del)  vhost ${action} ;;
+    *)    display_usage   ;;
+esac
