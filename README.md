@@ -146,6 +146,16 @@ link
 cd /home/tlbb/Server && ./Server
 ```
 
+- 增加环境可以更改端口，密码等，用于换端命令（前提是先执行 `rebuild` 再修改 `env-example` 再执行下面命令），执行完后建议重启服务器。
+
+```bash
+cd ~/.tlgame/gs && cp env-example .env && \
+source ~/.tlgame/gs/scripts/envfile.sh  && \
+resetini
+```
+
+
+
 ### 三、安装步骤（客户端）
 
 - 安装最新官方[客户端](http://tl.changyou.com/download/index.shtml) ,或者下载指定版本的[客户端](http://shang.qq.com/wpa/qunwpa?idkey=a67f7a7ee8d6fb3266b945d1ec512f31a374dcb74c863ead2d73029f5050576f) （进技术交流群获取）
