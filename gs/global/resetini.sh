@@ -9,5 +9,6 @@ echo -e "export LOGIN_PORT=`[ ! -z ${LOGIN_PORT} ] && echo ${LOGIN_PORT} || echo
 echo -e "export SERVER_PORT=`[ ! -z ${SERVER_PORT} ] && echo ${SERVER_PORT} || echo 15680`" >> /tmp/pass.txt
 echo -e "export WEBDB_PASSWORD=`[ ! -z ${WEBDB_PASSWORD} ] && echo ${WEBDB_PASSWORD} || echo 123456`" >> /tmp/pass.txt
 echo -e "export TLBBDB_PASSWORD=`[ ! -z ${TLBBDB_PASSWORD} ] && echo ${TLBBDB_PASSWORD} || echo 123456`" >> /tmp/pass.txt
+echo -e "export BILLING_PORT=`[ ! -z ${BILLING_PORT} ] && echo ${BILLING_PORT} || echo 21818`" >> /tmp/pass.txt
 
 cat /tmp/pass.txt >> /etc/profile && rm -rf /tmp/pass.txt

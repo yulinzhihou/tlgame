@@ -34,6 +34,10 @@ fi
 #    sed -i "s/3306/${WEB_MYSQL_PORT}/g" /root/.tlgame/gs/scripts/config.json
 #fi
 
+if [ ${BILLING_PORT} != "21818" ]; then
+    sed -i "s/21818/${BILLING_PORT}/g" /root/.tlgame/gs/scripts/config.json
+fi
+
 if [ "${LOGIN_PORT}" != "13580" ]; then
     sed -i "s/Port0=13580/Port0=${LOGIN_PORT}/g" /root/.tlgame/gs/scripts/ServerInfo.ini
 fi

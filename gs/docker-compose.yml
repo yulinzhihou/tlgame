@@ -12,6 +12,7 @@ services:
     ports:
       - "${LOGIN_PORT}:${LOGIN_PORT}"
       - "${SERVER_PORT}:${SERVER_PORT}"
+      - "${BILLING_PORT}:${BILLING_PORT}"
     restart: ${RESTART}
     links:
       - tlbbdb

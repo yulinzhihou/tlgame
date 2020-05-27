@@ -75,3 +75,6 @@ TLBBDB_PASSWORD=123456
 #
 # webdb数据库密码,会自动写入到配置文件中
 WEBDB_PASSWORD=123456
+#
+# billing验证端口，请使用非3306的端口(不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
+BILLING_PORT=21818
