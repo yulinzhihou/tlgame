@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+SCRIPT_NAME=$0
+DIR=$(dirname ${SCRIPT_NAME})
+
+# Use winpty
+PREFIX=
+which winpty > /dev/null 2>&1w
+if [ $? -eq 0 ]; then
+  PREFIX=winpty
+fi
+
+cd ${DIR}/..
+${PREFIX} docker-compose exec server ./tlbb/stop.sh
+docker-compose restart server
+
