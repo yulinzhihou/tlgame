@@ -11,14 +11,14 @@ cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git .tlgame
 - 第二步：下载完之后项目，进入相应目录。(**注：如果需要配置参数，请在下面命令执行前，修改好 `env_example` ,具体修改方法，自行百度，方法很多，不会的单独出视频教程，否则使用默认**)
 
 ```bash
-\cp -rf ~/.tlgame/gs/env-example ~/.tlgame/gs/.env
+\cp -rf ~/.tlgame/onekey/env-example ~/.tlgame/onekey/.env
 ```
 
 - 第三步：进行 `install.sh` 脚本安装环境，**（注：在运行安装命令前，必须确认你需要改的端口，密码都改了。不然一旦安装完成，再改就不会生效了）**
 
 ```bash
-source ~/.tlgame/gs/scripts/envfile.sh && \
-bash ~/.tlgame/gs/install.sh
+source ~/.tlgame/onekey/scripts/envfile.sh && \
+bash ~/.tlgame/onekey/install.sh
 ```
 
 - 第四步：如果小服务器配置，如`1G` `2G` 内存的，需要拓展一下虚拟内存，才能流畅跑起服务端**(注：此步骤超过4G内存的服务器可以不用管，必须保证服务器硬盘总容量有20G以上才能使用。不是空余空间，是总共有20G以上的就可以使用)**，如果内存大于或者等于**4G** 可以不需要执行下面的命令。
