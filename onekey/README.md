@@ -37,6 +37,16 @@ cd ~
 put
 ```
 
+```bash
+docker cp -L /root/tlbb gs_server_1:/home
+
+docker cp -L /root/billing gs_server_1:/home
+
+docker cp -L /root/ini/* gs_server_1:/home/tlbb/Server/Config
+```
+
+
+
 - 第六步：解压上传的服务端 **（不需要考虑是哪种格式，使用此命令即可完成解压操作）**
 
 ```bash
