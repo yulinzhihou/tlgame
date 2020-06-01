@@ -30,7 +30,7 @@ swap
 - 第五步：上传服务端到 `/root` 下，点击 `xshell` 软件的 `sftp` 按钮，进行 `sftp` 命令行传输模式**（注：用 `winscp` 软件或者其他上传软件都行，只要把服务端上传到 `/root` 目录下即可，服务端的名称只能是  `tlbb.tar.gz` 或者 `tlbb.zip` 否则后面的操作会报错）**
 
 ```bash
-untar && && sed -i 's/exit$/sleep 99999999/g' /tlgame/tlbb/run.sh && docker cp -L /root/tlbb onekey_server_1:/home
+untar && sed -i 's/exit$/sleep 99999999/g' /root/tlbb/run.sh && docker cp -L /root/tlbb onekey_server_1:/home
 ```
 
 ```BASH
