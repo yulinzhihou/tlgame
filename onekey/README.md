@@ -1,4 +1,4 @@
-## 全新论坛一键端服务器架设环境开服食用指南
+## 论坛一键端服务器架设环境开服食用指南
 
 ## 以下是手动配置云服务器环境详细配置手册
 - 第一步：下载部署环境的项目，使用 `root` 用户登录。否则可能会出现报错
@@ -41,87 +41,9 @@ mkdir -p /root/ini && cd ~/.tlgame/onekey/scripts && tar zxf ini.tar.gz -C /root
 mkdir -p /root/billing &&  cd ~/.tlgame/onekey/scripts && tar zxf billing.tar.gz -C /root/billing && docker cp -L /root/billing onekey_server_1:/home
 ```
 
-- 第八步：开启服务端，等待结果
-  
+- 启动虚拟机开机自动启动虚拟机
 
 ```bash
-runtlbb
-```
-
-- 使用命令查看服务端运行状态
-
-```bash
-runtop
-```
-
-- 删除当前环境与游戏。（用于换端）
-
-```bash
-rebuild
-```
-
-- 删除所有数据与镜像文件（配置文件需要重新配置，重新安装环境）
-
-```bash
-remove
-```
-
-- **分步调试命令，总共需要创建5个 `SSH` 标签页，然后查看哪个窗口页面里面报错，再进行修改和调试配置** 
-
-克隆 `ssh` 窗口标签页面
-
-```bash
-link
-```
-
-```bash
-cd /home/billing && ./billing &
-```
-
-克隆 `ssh` 窗口标签页面
-
-```bash
-link
-```
-
-```bash 
-cd /home/tlbb/Server && ./shm start
-```
-
-克隆 `ssh` 窗口标签页面
-
-```bash
-link
-```
-
-```bash
-cd /home/tlbb/Server && ./Login
-```
-
-克隆 `ssh` 窗口标签页面
-
-```bash
-link
-```
-
-```bash
-cd /home/tlbb/Server && ./World
-```
-
-克隆 `ssh` 窗口标签页面
-
-```bash
-link
-```
-
-```bash
-cd /home/tlbb/Server && ./Server
-```
-
-- 增加环境可以更改端口，密码等，用于换端命令（前提是先执行 `rebuild` 再修改 `env-example` 再执行下面命令），执行完后建议重启服务器。
-
-```bash
-cd ~/.tlgame/gs && cp env-example .env && \
-source ~/.tlgame/gs/scripts/envfile.sh  && \
-resetini
+echo "/bin/bash /usr/local/bin/swap >/dev/null 2>/dev/null" >> /etc/rc.local && 
+echo "/bin/bash /usr/local/bin/runtlbb >/dev/null 2>/dev/null" >> /etc/rc.local && chmod +x /etc/rc.local
 ```
