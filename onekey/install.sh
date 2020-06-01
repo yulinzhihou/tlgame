@@ -28,7 +28,7 @@ update_install_plugins() {
     wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
     yum makecache
     PLUGINS="dos2unix epel-release yum-utils wget git vim zip unzip"
-    yum -y install ${PLUGINS} && yum -y update
+    yum -y install ${PLUGINS}
 }
 
 # 配置与安装Docker-ce
@@ -46,10 +46,10 @@ EOF
 
 # 配置常用命令到系统中
 set_command() {
-    ls -l /root/.tlgame/gs/global/ | awk '{print $9}' > ./command.txt
+    ls -l /root/.tlgame/onekey/global/ | awk '{print $9}' > ./command.txt
     for VAR  in `cat ./command.txt`; do
         if [ -n ${VAR} ]; then
-            \cp -rf ~/.tlgame/gs/global/${VAR} /usr/local/bin/${VAR%%.*} && chmod +x /usr/local/bin/${VAR%%.*}
+            \cp -rf ~/.tlgame/onekey/global/${VAR} /usr/local/bin/${VAR%%.*} && chmod +x /usr/local/bin/${VAR%%.*}
         fi
     done
 }
@@ -66,7 +66,7 @@ set_command() {
 #}
 # 启动环境
 docker_run () {
-    cd ~/.tlgame/gs && docker-compose up -d
+    cd ~/.tlgame/onekey && docker-compose up -d
 }
 
 #配置全局变量参数
