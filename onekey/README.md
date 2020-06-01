@@ -30,33 +30,15 @@ swap
 - 第五步：上传服务端到 `/root` 下，点击 `xshell` 软件的 `sftp` 按钮，进行 `sftp` 命令行传输模式**（注：用 `winscp` 软件或者其他上传软件都行，只要把服务端上传到 `/root` 目录下即可，服务端的名称只能是  `tlbb.tar.gz` 或者 `tlbb.zip` 否则后面的操作会报错）**
 
 ```bash
-cd ~
+untar && && sed -i 's/exit$/sleep 99999999/g' /tlgame/tlbb/run.sh && docker cp -L /root/tlbb onekey_server_1:/home
 ```
 
 ```BASH
-put
+mkdir -p /root/ini && cd ~/.tlgame/onekey/scripts && tar zxf ini.tar.gz -C /root/ini && cd ~/ini && docker cp -L LoginInfo.ini onekey_server_1:/home/tlbb/Server/Config && docker cp -L ServerInfo.ini onekey_server_1:/home/tlbb/Server/Config && docker cp -L ShareMemInfo.ini onekey_server_1:/home/tlbb/Server/Config
 ```
 
 ```bash
-docker cp -L /root/tlbb gs_server_1:/home
-
-docker cp -L /root/billing gs_server_1:/home
-
-docker cp -L /root/ini/* gs_server_1:/home/tlbb/Server/Config
-```
-
-
-
-- 第六步：解压上传的服务端 **（不需要考虑是哪种格式，使用此命令即可完成解压操作）**
-
-```bash
-untar
-```
-
-- 第七步：设置配置文件**（将配置文件进行覆盖，此配置文件会按照 `env-example` 文件里面定义的进行替换，没有更改的话则使用默认值）**
-
-```bash
-setini
+mkdir -p /root/billing &&  cd ~/.tlgame/onekey/scripts && tar zxf billing.tar.gz -C /root/billing && docker cp -L /root/billing onekey_server_1:/home
 ```
 
 - 第八步：开启服务端，等待结果
