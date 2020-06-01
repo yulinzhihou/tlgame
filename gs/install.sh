@@ -84,6 +84,7 @@ set_clock
 update_install_plugins
 docker_ce
 set_command
+set_global_var
 docker_run
 
 echo "====================================="
