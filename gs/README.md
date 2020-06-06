@@ -159,9 +159,7 @@ cd /home/tlbb/Server && ./Server
 - 增加环境可以更改端口，密码等，用于换端命令（前提是先执行 `rebuild` 再修改 `env-example` 再执行下面命令），执行完后建议重启服务器。
 
 ```bash
-cd ~/.tlgame/gs && cp env-example .env && \
-source ~/.tlgame/gs/scripts/envfile.sh  && \
-resetini
+cd ~/.tlgame/gs && cp env-example .env && source ~/.tlgame/gs/scripts/envfile.sh && resetini
 ```
 
 
