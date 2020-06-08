@@ -33,7 +33,7 @@ swap
 untar && sed -i 's/exit$/sleep 99999999/g' /root/tlbb/run.sh && docker cp -L /root/tlbb onekey_server_1:/home
 ```
 
-```BASH
+```bash
 mkdir -p /root/ini && cd ~/.tlgame/onekey/scripts && tar zxf ini.tar.gz -C /root/ini && cd ~/ini && docker cp -L LoginInfo.ini onekey_server_1:/home/tlbb/Server/Config && docker cp -L ServerInfo.ini onekey_server_1:/home/tlbb/Server/Config && docker cp -L ShareMemInfo.ini onekey_server_1:/home/tlbb/Server/Config
 ```
 
@@ -41,6 +41,11 @@ mkdir -p /root/ini && cd ~/.tlgame/onekey/scripts && tar zxf ini.tar.gz -C /root
 mkdir -p /root/billing &&  cd ~/.tlgame/onekey/scripts && tar zxf billing.tar.gz -C /root/billing && docker cp -L /root/billing onekey_server_1:/home
 ```
 
+```bash
+#以上三条命令整合成两条命令
+untar
+setini
+```
 - 启动虚拟机开机自动启动虚拟机
 
 ```bash
