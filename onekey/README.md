@@ -4,8 +4,7 @@
 - 第一步：下载部署环境的项目，使用 `root` 用户登录。否则可能会出现报错
 
 ```bash
-yum install -y wget git vim && \
-cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git .tlgame
+yum install -y wget git vim && cd ~ && git clone https://gitee.com/yulinzhihou/tlgame.git .tlgame
 ```
 
 - 第二步：下载完之后项目，进入相应目录。(**注：如果需要配置参数，请在下面命令执行前，修改好 `env_example` ,具体修改方法，自行百度，方法很多，不会的单独出视频教程，否则使用默认**)
