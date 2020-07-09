@@ -2,3 +2,5 @@
 .gitattributes
 .idea
 workspace
+.DS_Store
+gs/.DS_Store
