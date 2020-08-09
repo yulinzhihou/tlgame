@@ -5,6 +5,6 @@
 # comment: 一键命令关闭所有
 cd ~/.tlgame/gs && \
 docker-compose exec -d server /bin/bash stop.sh
-if [ ]; then
-    
+if [ $? == 0 ]; then
+    echo "服务端已经关闭成功，如果需要重新开启，请运行，runtlbb 命令"
 fi

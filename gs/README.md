@@ -200,6 +200,6 @@ cd ~/.tlgame/gs && cp env-example .env && source ~/.tlgame/gs/scripts/envfile.sh
 | rebuild  | 删除当前容器，当前物理机所存储的数据，相当于换端使用         |                                                        |
 | remove   | 删除所有已经构建好的数据，需要重新安装环境，和配置文件       | 服务器环境错乱了，相当于重装系统                       |
 | resetini | 执行此命令前需要修改配置文件 `env-example` 再执行 `\cp -rf ~/.tlgame/gs/env-example ~/.tlgame/gs/.env` 此命令，重新配置端口，密码等信息 | 此命令作用不大，用于更换配置信息，可以使用其他方式修改 |
-|          |                                                              |                                                        |
+| change   | 执行此命令，即可完成更换服务端操作，数据库不会清除，原服务端版本的数据还会存在。建议不要使用相同账号进入，可能会报错 | 服务端压缩包必须上传到 `/root` 目录下                  |
 |          |                                                              |                                                        |
 
