@@ -5,3 +5,6 @@
 # comment: 一键命令关闭所有
 cd ~/.tlgame/gs && \
 docker-compose exec -d server /bin/bash stop.sh
+if [ ]; then
+    
+fi
