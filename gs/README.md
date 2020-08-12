@@ -122,7 +122,7 @@ link
 ```
 
 ```bash
-cd /home/billing && ./billing &
+cd /home/billing && ./billing up -d
 ```
 
 克隆 `ssh` 窗口标签页面
