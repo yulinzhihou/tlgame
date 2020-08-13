@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # author: yulinzhihou
 # mail: yulinzhihou@gmail.com
-# date: 2020-05-27
-# comment: 一键命令开服失败，关闭所有
+# date: 2020-08-09
+# comment: 备份数据库功能

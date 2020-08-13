@@ -1,0 +1,6 @@
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
+warning: rpmts_HdrFromFdno: Header V3 RSA/SHA1 Signature, key ID c105b9de: NOKEY
+Importing GPG key 0xC105B9DE:
+ Userid : CentOS-6 Key (CentOS 6 Official Signing Key) <centos-6-key@centos.org>
+ Package: centos-release-6-8.el6.centos.12.3.x86_64 (@CentOS/6.8)
+ From   : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
