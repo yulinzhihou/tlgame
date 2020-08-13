@@ -1,11 +1,11 @@
 FROM centos:6.8
 
 WORKDIR /home/tlbb
-
-ADD ./config/billing.tar.gz /home/
+ADD ./config/billing.tar.gz /home/billing/
 
 COPY ./config/odbc.ini /etc/odbc.ini
 COPY ./config/mysql-connector-odbc-5.1.5r1144-7.el6.i686.rpm /tmp/mysql-connector-odbc-5.1.5r1144-7.el6.i686.rpm
+
 RUN yum clean all && \
     yum update -y && \
     yum check && \
@@ -15,5 +15,4 @@ RUN yum clean all && \
     ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' > /etc/timezone && \
     rm -f /tmp/mysql-connector-odbc-5.1.5r1144-7.el6.i686.rpm
 
-ENTRYPOINT /home/billing/billing up -d
-
+CMD tail -f /dev/null

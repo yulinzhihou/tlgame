@@ -9,7 +9,7 @@
 tar zxf /root/.tlgame/gs/scripts/ini.tar.gz -C /root/.tlgame/gs/scripts/
 tar zxf /root/.tlgame/gs/scripts/billing.tar.gz -C /root/.tlgame/gs/scripts/
 if [ ! -d "/tlgame/billing/" ]; then
-    mkdir -p /tlgame/billing/
+    mkdir -p /tlgame/billing/ && chown -R root:root /tlgame/billing && chmod -R 777 /tlgame
 fi
 tar zxf /root/.tlgame/gs/scripts/billing.tar.gz -C /tlgame/billing/
 
@@ -56,3 +56,4 @@ cd ~/.tlgame/ && \
 git checkout -- gs/services/server/config/odbc.ini && \
 rm -rf  /root/.tlgame/gs/scripts/*.ini && \
 rm -rf  /root/.tlgame/gs/scripts/config.json
+echo -e "配置文件已经写入成功，可以执行 runtlbb 进行开服操作"
