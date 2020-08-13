@@ -6,7 +6,7 @@
 chmod -R 777 /tlgame && \
 cd ~/.tlgame/gs && \
 docker-compose exec -d server /home/billing/billing up -d  && \
-sed -i 's/exit$/sleep 99999999/g' /tlgame/tlbb/run.sh && \
+sed -i 's/exit$/tail -f /dev/null /g' /tlgame/tlbb/run.sh && \
 cd ~/.tlgame/gs && \
 docker-compose exec -d server /bin/bash run.sh
 echo "已经成功启动服务端，请耐心等待几分钟后，可以使用runtop或者 link  top 进行查看开服的情况！"
