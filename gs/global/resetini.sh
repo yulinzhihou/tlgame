@@ -11,4 +11,4 @@ echo -e "export WEBDB_PASSWORD=`[ ! -z ${WEBDB_PASSWORD} ] && echo ${WEBDB_PASSW
 echo -e "export TLBBDB_PASSWORD=`[ ! -z ${TLBBDB_PASSWORD} ] && echo ${TLBBDB_PASSWORD} || echo 123456`" >> /tmp/pass.txt
 echo -e "export BILLING_PORT=`[ ! -z ${BILLING_PORT} ] && echo ${BILLING_PORT} || echo 21818`" >> /tmp/pass.txt
 
-cat /tmp/pass.txt >> /etc/profile && rm -rf /tmp/pass.txt
+cat /tmp/pass.txt > /etc/profile.d/gsconfig.sh && rm -rf /tmp/pass.txt
