@@ -1,7 +1,6 @@
 FROM centos:6.8
 
 WORKDIR /home/tlbb
-ADD ./config/billing.tar.gz /home/billing/
 
 COPY ./config/odbc.ini /etc/odbc.ini
 COPY ./config/mysql-connector-odbc-5.1.5r1144-7.el6.i686.rpm /tmp/mysql-connector-odbc-5.1.5r1144-7.el6.i686.rpm
