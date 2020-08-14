@@ -91,7 +91,7 @@ set_global_var
 docker_run
 
 echo "====================================="
-echo -e "\033[32m Tlgame 环境安装成功!\033[0m"
+echo -e "\e[44m Tlgame 环境安装成功!\e[0m"
 echo -e "====================================="
 echo -e "账号数据库端口: `[ ! -z ${WEB_MYSQL_PORT} ] && echo ${WEB_MYSQL_PORT} || echo 33060`"
 echo -e "游戏数据库端口: `[ ! -z ${TLBB_MYSQL_PORT} ] && echo ${TLBB_MYSQL_PORT} || echo 33061`"
@@ -100,8 +100,8 @@ echo -e "登录网关端口: `[ ! -z ${LOGIN_PORT} ] && echo ${LOGIN_PORT} || ec
 echo -e "游戏网关端口: `[ ! -z ${SERVER_PORT} ] && echo ${SERVER_PORT} || echo 15680`"
 echo -e "账号数据库密码: `[ ! -z ${WEBDB_PASSWORD} ] && echo ${WEBDB_PASSWORD} || echo 123456`"
 echo -e "游戏数据库密码: `[ ! -z ${TLBBDB_PASSWORD} ] && echo ${TLBBDB_PASSWORD} || echo 123456`"
-echo -e "网站把域名解析到云服务器IP上，然后把网站文件放到 /tlgame/www/localhost 目录里面即可访问。"
+echo -e "\e[44m 网站把域名解析到云服务器IP上，然后把网站文件放到 /tlgame/www/localhost 目录里面即可访问。\e[0m"
 echo -e "====================================="
 endTime=`date +%s`
 ((outTime=($endTime-$startTime)/60))
-echo -e "总耗时:\033[32m $outTime \033[0m 分钟!"
+echo -e "总耗时:\e[44m $outTime \e[0m 分钟!"

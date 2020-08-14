@@ -52,8 +52,10 @@ fi
 \cp -rf /root/.tlgame/gs/scripts/config.json /tlgame/billing/
 docker cp /root/.tlgame/gs/services/server/config/odbc.ini gs_server_1:/etc
 #每次更新后，先重置更改过的文件
+sed -i 's/^else$/else  \/home\/billing\/billing up -d/g' /tlgame/tlbb/run.sh && \
+sed -i 's/exit$/tail -f \/dev\/null/g' /tlgame/tlbb/run.sh && \
 cd ~/.tlgame/ && \
 git checkout -- gs/services/server/config/odbc.ini && \
 rm -rf  /root/.tlgame/gs/scripts/*.ini && \
 rm -rf  /root/.tlgame/gs/scripts/config.json
-echo -e "配置文件已经写入成功，可以执行 runtlbb 进行开服操作"
+echo -e "\e[44m 配置文件已经写入成功，可以执行【runtlbb】进行开服操作！！\e[0m"
