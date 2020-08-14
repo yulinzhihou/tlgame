@@ -8,7 +8,7 @@ if [ ! -f /usr/swap/swapfile ]; then
     mkswap /usr/swap/swapfile && \
     chmod -R 600 /usr/swap/swapfile && swapon /usr/swap/swapfile && \
     echo "/usr/swap/swapfile swap swap defaults 0 0" >> /etc/fstab
-    echo -e "\e[44m your swap was upto (`free -hm | awk -F " " 'NR==2{print $2}'` + 4.0G) success \e[0m"
+    echo -e "\e[44m 虚拟缓存提升到 (`free -hm | awk -F " " 'NR==2{print $2}'` + 4.0G) 成功！ \e[0m"
 else
-    echo -e "\e[44m your swap was (`free -hm | awk -F " " 'NR==3{print $2}'`) \e[0m"
+    echo -e "\e[44m 虚拟缓存已经提升到 (`free -hm | awk -F " " 'NR==3{print $2}'`) \e[0m"
 fi
