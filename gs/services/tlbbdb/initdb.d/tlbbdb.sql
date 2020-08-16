@@ -120,7 +120,7 @@ CREATE TABLE `t_char` (
   `visualgem` text,
   `isolditem` smallint(6) NOT NULL DEFAULT '0',
   `uipoint` int(11) NOT NULL DEFAULT '0',
-  `AskYuanBao` int(11) NOT NULL,
+  `AskYuanBao` int(11) NOT NULL DEFAULT 0,
   `zengdian` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`aid`),
   UNIQUE KEY `Index_char_charguid` (`charguid`),
