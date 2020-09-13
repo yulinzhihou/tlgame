@@ -30,6 +30,7 @@ CREATE TABLE `account` (
   `tel` varchar(16) default NULL,
   `id_type` enum('IdCard') default 'IdCard',
   `id_card` varchar(32) default NULL,
+  `is_online` tinyint(1) NOT NULL DEFAULT 0,
   `point` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`,`name`),
   UNIQUE KEY `id` USING BTREE (`id`),
