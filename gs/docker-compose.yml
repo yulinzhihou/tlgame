@@ -6,7 +6,7 @@ services:
     build:
       context: ./services/server
       dockerfile: Dockerfile
-    image: registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_gs:v0.1
+    image: registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_gs:v0.3
     volumes:
       - "${SHARED_DIR}/:/home"
     ports:
