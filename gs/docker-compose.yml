@@ -45,3 +45,49 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "web"
     restart: ${RESTART}
+  nginx:
+    build:
+      context: ./services/nginx
+      args:
+        NGINX_VERSION: ${NGINX_VERSION}
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        NGINX_INSTALL_APPS: ${NGINX_INSTALL_APPS}
+    container_name: nginx
+    ports:
+      - "${NGINX_HTTP_HOST_PORT}:80"
+      - "${NGINX_HTTPS_HOST_PORT}:443"
+    volumes:
+      - ${SHARED_DIR}/www:/www/:rw
+      - ${NGINX_SSL_CERTIFICATE_DIR}:/ssl:rw
+      - ${NGINX_CONFD_DIR}:/etc/nginx/conf.d/:rw
+      - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
+      - ${NGINX_FASTCGI_PHP_CONF}:/etc/nginx/fastcgi-php.conf:ro
+      - ${NGINX_FASTCGI_PARAMS}:/etc/nginx/fastcgi_params:ro
+      - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
+    environment:
+      TZ: "$TZ"
+    restart: ${RESTART}
+    networks:
+      - default
+  php:
+      build:
+        context: ./services/php
+        args:
+          PHP_VERSION: php:${PHP_VERSION}-fpm-alpine
+          CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+          PHP_EXTENSIONS: ${PHP_EXTENSIONS}
+          TZ: "$TZ"
+      container_name: php
+      expose:
+        - 9501:9501
+      volumes:
+        - ${SHARED_DIR}/www:/www/:rw
+        - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+        - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+        - ${PHP_LOG_DIR}:/var/log/php
+        - ${SHARED_DIR}/composer:/tmp/composer
+      restart: ${RESTART}
+      cap_add:
+        - SYS_PTRACE
+      networks:
+        - default
