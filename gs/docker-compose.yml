@@ -30,7 +30,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${TL_MYSQL_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: "tlbbdb webdb"
     restart: ${RESTART}
   # Web database
   nginx:

@@ -15,6 +15,7 @@ Date: 2014-10-19 09:19:46
 
 SET FOREIGN_KEY_CHECKS=0;
 
+CREATE database tlbbdb;
 -- ----------------------------
 -- Table structure for `t_ability`
 -- ----------------------------
