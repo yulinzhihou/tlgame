@@ -1,6 +1,0 @@
-.env
-.gitattributes
-.idea
-workspace
-webdb/mysql
-tlbbdb/mysql
