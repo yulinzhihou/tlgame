@@ -26,12 +26,11 @@ services:
       - "${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql"
       - "${SHARED_DIR}/webdb/mysql:/var/lib/mysql"
     ports:
-      - "${TLBB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
+      - "${TL_MYSQL_PORT}:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ${TLBBDB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${TL_MYSQL_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE_TLBB: "tlbbdb"
-      MYSQL_DATABASE_WEB: "webdb"
+      MYSQL_DATABASE: "tlbbdb webdb"
     restart: ${RESTART}
   # Web database
   nginx:
@@ -41,5 +40,4 @@ services:
     - "${SHARED_DIR}/www/:/home/www"
     ports:
     - "${WEBSERVER_PORT}:80"
-    - "${WEBSERVER_SSL_PORT}:443"
     restart: ${RESTART}
