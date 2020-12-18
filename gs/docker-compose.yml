@@ -79,7 +79,7 @@ services:
           TZ: "$TZ"
       container_name: php
       expose:
-        - 9501:9501
+        - 9501
       volumes:
         - ${SHARED_DIR}/www:/www/:rw
         - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
