@@ -17,23 +17,6 @@
 # 主机目录，所有文件都将映射到云服务器的/tlgame目录里面
 SHARED_DIR=/tlgame
 #
-# 容器机器时区
-TZ=Asia/Shanghai
-#
-# 容器安装包链接
-CONTAINER_PACKAGE_URL=mirrors.aliyun.com
-
-# Nginx 服务器配置
-NGINX_VERSION=1.15.7-alpine
-NGINX_HTTP_HOST_PORT=80
-NGINX_HTTPS_HOST_PORT=443
-NGINX_CONFD_DIR=./services/nginx/conf.d
-NGINX_CONF_FILE=./services/nginx/nginx.conf
-NGINX_FASTCGI_PHP_CONF=./services/nginx/fastcgi-php.conf
-NGINX_FASTCGI_PARAMS=./services/nginx/fastcgi_params
-NGINX_SSL_CERTIFICATE_DIR=./services/nginx/ssl
-NGINX_LOG_DIR=./logs/nginx
-#
 # 登录网关端口转发：ServerInfo.ini > [Server1] > PORT0(不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
 LOGIN_PORT=13580
 # 游戏端口转发：ServerInfo.ini > [Server0] > PORT0(不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
@@ -47,15 +30,14 @@ WEB_MYSQL_PORT=33060
 #
 # 游戏数据库端口，请使用非3306的端口(不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
 TLBB_MYSQL_PORT=33061
+# 网站端口(不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
+WEBSERVER_PORT=8080
 #
 # 容器服务重启方式
 RESTART=always
 #
 # tlbbdb数据库密码,会自动写入到配置文件中
 TLBBDB_PASSWORD=123456
-#
-# webdb数据库密码,会自动写入到配置文件中
-WEBDB_PASSWORD=123456
 #
 # billing验证端口，请使用非3306的端口(不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
 BILLING_PORT=21818

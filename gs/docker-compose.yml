@@ -40,9 +40,5 @@ services:
     volumes:
     - "${SHARED_DIR}/www/:/home/www"
     ports:
-    - "${WEB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
-    environment:
-      MYSQL_ROOT_PASSWORD: ${WEBDB_PASSWORD}
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: "web"
+    - "${WEBSERVER_PORT}:${WEBSERVER_PORT}"
     restart: ${RESTART}
