@@ -71,13 +71,11 @@ docker_run () {
 
 #配置全局变量参数
 set_global_var() {
-    echo -e "export WEB_MYSQL_PORT=`[ ! -z ${WEB_MYSQL_PORT} ] && echo ${WEB_MYSQL_PORT} || echo 33060`" >> /tmp/gsconfig.txt
-    echo -e "export TLBB_MYSQL_PORT=`[ ! -z ${TLBB_MYSQL_PORT} ] && echo ${TLBB_MYSQL_PORT} || echo 33061`" >> /tmp/gsconfig.txt
+    echo -e "export TL_MYSQL_PORT=`[ ! -z ${TL_MYSQL_PORT} ] && echo ${TL_MYSQL_PORT} || echo 33061`" >> /tmp/gsconfig.txt
     echo -e "export LOGIN_PORT=`[ ! -z ${LOGIN_PORT} ] && echo ${LOGIN_PORT} || echo 13580`" >> /tmp/gsconfig.txt
     echo -e "export SERVER_PORT=`[ ! -z ${SERVER_PORT} ] && echo ${SERVER_PORT} || echo 15680`" >> /tmp/gsconfig.txt
-    echo -e "export WEBDB_PASSWORD=`[ ! -z ${WEBDB_PASSWORD} ] && echo ${WEBDB_PASSWORD} || echo 123456`" >> /tmp/gsconfig.txt
-    echo -e "export TLBBDB_PASSWORD=`[ ! -z ${TLBBDB_PASSWORD} ] && echo ${TLBBDB_PASSWORD} || echo 123456`" >> /tmp/gsconfig.txt
-    echo -e "export BILLING_PORT=`[ ! -z ${BILLING_PORT} ] && echo ${BILLING_PORT} || echo 21818`" >> /tmp/gsconfig.txt
+    echo -e "export TL_MYSQL_PASSWORD=`[ ! -z ${TL_MYSQL_PASSWORD} ] && echo ${TL_MYSQL_PASSWORD} || echo 123456`" >> /tmp/gsconfig.txt
+    echo -e "export WEBSERVER_PORT=`[ ! -z ${WEBSERVER_PORT} ] && echo ${WEBSERVER_PORT} || echo 21818`" >> /tmp/gsconfig.txt
 
     cat /tmp/gsconfig.txt > /etc/profile.d/gsconfig.sh && rm -rf /tmp/gsconfig.txt && \
     source /etc/profile.d/gsconfig.sh
@@ -91,16 +89,14 @@ set_global_var
 docker_run
 
 echo "====================================="
-echo -e "\e[44m Tlgame 环境安装成功!\e[0m"
+echo -e "\e[44m GS游享网 [https://gsgameshare.com] 专用环境安装成功!\e[0m"
 echo -e "====================================="
-echo -e "账号数据库端口: `[ ! -z ${WEB_MYSQL_PORT} ] && echo ${WEB_MYSQL_PORT} || echo 33060`"
-echo -e "游戏数据库端口: `[ ! -z ${TLBB_MYSQL_PORT} ] && echo ${TLBB_MYSQL_PORT} || echo 33061`"
-echo -e "Billing端口: `[ ! -z ${BILLING_PORT} ] && echo ${BILLING_PORT} || echo 21818`"
+echo -e "数据库端口: `[ ! -z ${TL_MYSQL_PORT} ] && echo ${TL_MYSQL_PORT} || echo 33061`"
 echo -e "登录网关端口: `[ ! -z ${LOGIN_PORT} ] && echo ${LOGIN_PORT} || echo 13580`"
 echo -e "游戏网关端口: `[ ! -z ${SERVER_PORT} ] && echo ${SERVER_PORT} || echo 15680`"
-echo -e "账号数据库密码: `[ ! -z ${WEBDB_PASSWORD} ] && echo ${WEBDB_PASSWORD} || echo 123456`"
-echo -e "游戏数据库密码: `[ ! -z ${TLBBDB_PASSWORD} ] && echo ${TLBBDB_PASSWORD} || echo 123456`"
-echo -e "\e[44m 网站把域名解析到云服务器IP上，然后把网站文件放到 /tlgame/www/localhost 目录里面即可访问。\e[0m"
+echo -e "数据库密码: `[ ! -z ${TL_MYSQL_PASSWORD} ] && echo ${TL_MYSQL_PASSWORD} || echo 123456`"
+echo -e "网站端口: `[ ! -z ${WEBSERVER_PORT} ] && echo ${WEBSERVER_PORT} || echo 8080`"
+echo -e "\e[44m 网站把域名解析到云服务器IP上加端口，然后把网站文件放到 /tlgame/www 目录里面即可访问。\e[0m"
 echo -e "====================================="
 endTime=`date +%s`
 ((outTime=($endTime-$startTime)/60))
