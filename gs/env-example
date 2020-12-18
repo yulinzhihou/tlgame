@@ -22,24 +22,7 @@ TZ=Asia/Shanghai
 #
 # 容器安装包链接
 CONTAINER_PACKAGE_URL=mirrors.aliyun.com
-#
-# PHP7
-# 可使用的PHP拓展
-# pdo_mysql,zip,pcntl,mysqli,mbstring,exif,bcmath,calendar,
-# sockets,gettext,shmop,sysvmsg,sysvsem,sysvshm,pdo_rebird,
-# pdo_dblib,pdo_oci,pdo_odbc,pdo_pgsql,pgsql,oci8,odbc,dba,
-# gd,intl,bz2,soap,xsl,xmlrpc,wddx,curl,readline,snmp,pspell,
-# recode,tidy,gmp,imap,ldap,imagick,sqlsrv,mcrypt,opcache,
-# redis,memcached,xdebug,swoole,pdo_sqlsrv,sodium,yaf,mysql,
-# amqp,mongodb,event,rar,ast,yac,yar,yaconf,msgpack,igbinary,
-# seaslog,varnish,xhprof,xlswriter,memcache,rdkafka,zookeeper
-# 如果需要安装，复制到下面项目里面。
-PHP_VERSION=7.4.1
-PHP_PHP_CONF_FILE=./services/php/php.ini
-PHP_FPM_CONF_FILE=./services/php/php-fpm.conf
-PHP_LOG_DIR=./logs/php
-PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache
-#
+
 # Nginx 服务器配置
 NGINX_VERSION=1.15.7-alpine
 NGINX_HTTP_HOST_PORT=80
@@ -50,8 +33,6 @@ NGINX_FASTCGI_PHP_CONF=./services/nginx/fastcgi-php.conf
 NGINX_FASTCGI_PARAMS=./services/nginx/fastcgi_params
 NGINX_SSL_CERTIFICATE_DIR=./services/nginx/ssl
 NGINX_LOG_DIR=./logs/nginx
-# Available apps: certbot
-#NGINX_INSTALL_APPS=
 #
 # 登录网关端口转发：ServerInfo.ini > [Server1] > PORT0(不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
 LOGIN_PORT=13580

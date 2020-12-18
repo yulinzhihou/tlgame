@@ -15,29 +15,31 @@ services:
       - "${BILLING_PORT}:${BILLING_PORT}"
     restart: ${RESTART}
     links:
-      - tlbbdb
-      - webdb
+      - tlmysql
+      - nginx
   # Game database
-  tlbbdb:
+  tlmysql:
     build:
       context: ./services/tlbbdb
     image: registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_tlbbdbserver:v0.1
     volumes:
       - "${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql"
+      - "${SHARED_DIR}/webdb/mysql:/var/lib/mysql"
     ports:
       - "${TLBB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
+      - "${WEB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
     environment:
       MYSQL_ROOT_PASSWORD: ${TLBBDB_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: "tlbbdb"
+      MYSQL_DATABASE_TLBB: "tlbbdb"
+      MYSQL_DATABASE_WEB: "webdb"
     restart: ${RESTART}
   # Web database
-  webdb:
+  nginx:
     build:
-      context: ./services/webdb
-    image: registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_webdbserver:v0.1
+      context: ./services/nginx
     volumes:
-    - "${SHARED_DIR}/webdb/mysql:/var/lib/mysql"
+    - "${SHARED_DIR}/www/:/home/www"
     ports:
     - "${WEB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
     environment:
