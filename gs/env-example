@@ -34,22 +34,22 @@ CONTAINER_PACKAGE_URL=mirrors.aliyun.com
 # amqp,mongodb,event,rar,ast,yac,yar,yaconf,msgpack,igbinary,
 # seaslog,varnish,xhprof,xlswriter,memcache,rdkafka,zookeeper
 # 如果需要安装，复制到下面项目里面。
-#PHP_VERSION=7.4.1
-#PHP_PHP_CONF_FILE=./services/php/php.ini
-#PHP_FPM_CONF_FILE=./services/php/php-fpm.conf
-#PHP_LOG_DIR=./logs/php
-#PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache
+PHP_VERSION=7.4.1
+PHP_PHP_CONF_FILE=./services/php/php.ini
+PHP_FPM_CONF_FILE=./services/php/php-fpm.conf
+PHP_LOG_DIR=./logs/php
+PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache
 #
 # Nginx 服务器配置
-#NGINX_VERSION=1.15.7-alpine
-#NGINX_HTTP_HOST_PORT=80
-#NGINX_HTTPS_HOST_PORT=443
-#NGINX_CONFD_DIR=./services/nginx/conf.d
-#NGINX_CONF_FILE=./services/nginx/nginx.conf
-#NGINX_FASTCGI_PHP_CONF=./services/nginx/fastcgi-php.conf
-#NGINX_FASTCGI_PARAMS=./services/nginx/fastcgi_params
-#NGINX_SSL_CERTIFICATE_DIR=./services/nginx/ssl
-#NGINX_LOG_DIR=./logs/nginx
+NGINX_VERSION=1.15.7-alpine
+NGINX_HTTP_HOST_PORT=80
+NGINX_HTTPS_HOST_PORT=443
+NGINX_CONFD_DIR=./services/nginx/conf.d
+NGINX_CONF_FILE=./services/nginx/nginx.conf
+NGINX_FASTCGI_PHP_CONF=./services/nginx/fastcgi-php.conf
+NGINX_FASTCGI_PARAMS=./services/nginx/fastcgi_params
+NGINX_SSL_CERTIFICATE_DIR=./services/nginx/ssl
+NGINX_LOG_DIR=./logs/nginx
 # Available apps: certbot
 #NGINX_INSTALL_APPS=
 #

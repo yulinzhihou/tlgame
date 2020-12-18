@@ -45,6 +45,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "web"
     restart: ${RESTART}
+
   nginx:
     build:
       context: ./services/nginx
@@ -67,8 +68,7 @@ services:
     environment:
       TZ: "$TZ"
     restart: ${RESTART}
-    networks:
-      - default
+
   php:
       build:
         context: ./services/php
@@ -87,7 +87,3 @@ services:
         - ${PHP_LOG_DIR}:/var/log/php
         - ${SHARED_DIR}/composer:/tmp/composer
       restart: ${RESTART}
-      cap_add:
-        - SYS_PTRACE
-      networks:
-        - default
