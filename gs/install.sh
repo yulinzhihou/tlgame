@@ -27,7 +27,7 @@ update_install_plugins() {
     mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
     wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
     yum makecache
-    PLUGINS="dos2unix epel-release yum-utils wget git vim zip unzip zlib zlib-devel freetype freetype-devel lsof pcre pcre-devel vixie-cron crontabs"
+    PLUGINS="dos2unix epel-release yum-utils wget git vim zip unzip zlib zlib-devel freetype freetype-devel lsof pcre pcre-devel crontabs"
     yum -y install ${PLUGINS} && yum -y update
 }
 
@@ -54,16 +54,6 @@ set_command() {
     done
 }
 
-# 配置 github_user_content 安装源
-#github_user_content(){
-#    # 获取域名对应解析的IP地址
-#    IP_STR=`ping raw.githubusercontent.com -c 1 | sed '1{s/[^(]*(//;s/).*//;q}'`
-#    # 写入HOSTS文件
-#    #if [[ -z `find /etc/hosts|xargs grep -ri "${IP_STR}"` ]]; then
-#        sudo echo "${IP_STR}  raw.githubusercontent.com" >> /etc/hosts
-#    #fi
-#    echo "${IP_STR}  raw.githubusercontent.com"
-#}
 # 启动环境
 docker_run () {
     cd ~/.tlgame/gs && docker-compose up -d
