@@ -20,14 +20,13 @@ services:
   # Game database
   tlmysql:
     build:
-      context: ./services/tlbbdb
+      context: ./services/tlmysql
     image: registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_tlbbdbserver:v0.1
     volumes:
       - "${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql"
       - "${SHARED_DIR}/webdb/mysql:/var/lib/mysql"
     ports:
       - "${TLBB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
-      - "${WEB_MYSQL_PORT}:${HOST_MYSQL_PORT}"
     environment:
       MYSQL_ROOT_PASSWORD: ${TLBBDB_PASSWORD}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
