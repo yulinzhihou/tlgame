@@ -1,12 +1,6 @@
-
 FROM creativitykills/nginx-php-server:latest
 
-#ARG TZ
-#ARG NGINX_VERSION
-#ARG CONTAINER_PACKAGE_URL
-#
-#RUN if [ "${CONTAINER_PACKAGE_URL}" != "" ]; then \
-#        sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories; \
-#    fi
+RUN rm -rf /etc/nginx/sites-available/default.conf
+COPY ./init.d/default.conf /etc/nginx/sites-available/default.conf
 
 WORKDIR /home/www/
