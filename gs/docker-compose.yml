@@ -21,7 +21,6 @@ services:
   tlmysql:
     build:
       context: ./services/tlmysql
-    image: registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_tlbbdbserver:v0.1
     volumes:
       - "${SHARED_DIR}/tlbbdb/mysql:/var/lib/mysql"
       - "${SHARED_DIR}/webdb/mysql:/var/lib/mysql"
