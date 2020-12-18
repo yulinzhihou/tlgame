@@ -15,7 +15,6 @@ Date: 2012-09-19 16:25:04
 
 SET FOREIGN_KEY_CHECKS=0;
 
-CREATE database web;
 -- ----------------------------
 -- Table structure for `account`
 -- ----------------------------
