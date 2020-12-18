@@ -32,6 +32,8 @@ WEB_MYSQL_PORT=33060
 TLBB_MYSQL_PORT=33061
 # 网站端口(不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
 WEBSERVER_PORT=8080
+# 网站端口 HTTPS (不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
+WEBSERVER_SSL_PORT=8443
 #
 # 容器服务重启方式
 RESTART=always
