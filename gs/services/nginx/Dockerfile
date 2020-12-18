@@ -1,6 +1,6 @@
 ARG NGINX_VERSION
 #FROM nginx:${NGINX_VERSION}
-FROM registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlnginx:v0.3
+FROM registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlnginx:v0.1
 
 #ARG TZ
 #ARG NGINX_VERSION
