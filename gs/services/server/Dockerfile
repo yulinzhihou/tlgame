@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_gs:v0.3
+FROM registry.cn-hangzhou.aliyuncs.com/yulinzhihou/tlsf_gs:v0.1
 
 WORKDIR /home/tlbb
 
