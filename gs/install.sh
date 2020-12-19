@@ -20,6 +20,31 @@ Get_OS_Bit()
     fi
 }
 
+# 获取平台名称
+Get_Dist_Version()
+{
+    if command -v lsb_release >/dev/null 2>&1; then
+        DISTRO_Version=$(lsb_release -sr)
+    elif [ -f /etc/lsb-release ]; then
+        . /etc/lsb-release
+        DISTRO_Version="$DISTRIB_RELEASE"
+    elif [ -f /etc/os-release ]; then
+        . /etc/os-release
+        DISTRO_Version="$VERSION_ID"
+    fi
+    if [[ "${DISTRO}" = "" || "${DISTRO_Version}" = "" ]]; then
+        if command -v python2 >/dev/null 2>&1; then
+            DISTRO_Version=$(python2 -c 'import platform; print platform.linux_distribution()[1]')
+        elif command -v python3 >/dev/null 2>&1; then
+            DISTRO_Version=$(python3 -c 'import platform; print(platform.linux_distribution()[1])')
+        else
+            Install_LSB
+            DISTRO_Version=`lsb_release -rs`
+        fi
+    fi
+    printf -v "${DISTRO}_Version" '%s' "${DISTRO_Version}"
+}
+
 # 字体输出颜色
 Color_Text()
 {
@@ -249,6 +274,7 @@ CentOS_RemoveAMP()
 # 执行操作
 Disable_Selinux
 Set_Timezone
+Get_Dist_Version
 RHEL_Modify_Source
 update_install_plugins
 docker_ce
