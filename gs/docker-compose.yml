@@ -20,6 +20,7 @@ services:
   tlmysql:
     build:
       context: ./services/tlmysql
+      dockerfile: Dockerfile
     volumes:
       - "${SHARED_DIR}/tlmysql/:/var/lib/mysql"
     ports:
@@ -33,6 +34,7 @@ services:
   nginx:
     build:
       context: ./services/nginx
+      dockerfile: Dockerfile
     volumes:
     - "${SHARED_DIR}/www/:/var/www"
     ports:
