@@ -274,6 +274,7 @@ CentOS_RemoveAMP()
 # 执行操作
 Disable_Selinux
 Set_Timezone
+Get_Dist_Name
 Get_Dist_Version
 RHEL_Modify_Source
 update_install_plugins
@@ -282,6 +283,7 @@ set_command
 set_global_var
 docker_run
 
+clear
 echo "====================================="
 echo -e "\e[44m GS游享网 [https://gsgameshare.com] 专用环境安装成功!\e[0m"
 echo -e "====================================="
