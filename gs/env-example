@@ -8,7 +8,7 @@
 # SERVER_PORT   注：游戏服务端口，默认15680
 # TL_MYSQL_PORT   注：数据库端口，默认33061
 # TL_MYSQL_PASSWORD   注：数据库密码，默认123456
-# WEBSERVER_PORT   注：网站服务器端口，默认8080
+# WEBSERVER_PORT   注：网站服务器端口，默认58080
 # 以上5项为可自定项目，按自己的实际情况进行定义
 # 请根据自己的需求定义对应的值。如果不自定，则会使用本配置文件默认值
 # 请切记，上面5项的值在下面修改，不是直接写在上面。
@@ -28,7 +28,7 @@ SERVER_PORT=15680
 TL_MYSQL_PORT=33061
 
 # 网站端口(不能超过65535，建议写大点的值，因为小值和一些特定的值是系统专用的)
-WEBSERVER_PORT=8080
+WEBSERVER_PORT=58080
 
 # tlmysql数据库密码,会自动写入到配置文件中
 TL_MYSQL_PASSWORD=123456
