@@ -225,9 +225,9 @@ echo -e "\t1.数据库端口: `[ ! -z ${TL_MYSQL_PORT} ] && echo ${TL_MYSQL_PORT
 echo -e "\t2.数据库密码: `[ ! -z ${TL_MYSQL_PASSWORD} ] && echo ${TL_MYSQL_PASSWORD} || echo 123456`"
 echo -e "\t3.登录网关端口: `[ ! -z ${LOGIN_PORT} ] && echo ${LOGIN_PORT} || echo 13580`"
 echo -e "\t4.游戏网关端口: `[ ! -z ${SERVER_PORT} ] && echo ${SERVER_PORT} || echo 15680`"
-echo -e "\t5.网站端口: `[ ! -z ${WEBSERVER_PORT} ] && echo ${WEBSERVER_PORT} || echo 8080`"
+echo -e "\t5.网站端口: `[ ! -z ${WEBSERVER_PORT} ] && echo ${WEBSERVER_PORT} || echo 58080`"
 echo -e "\e[44m 把域名解析到服务器IP上加网站端口，然后把网站文件上传到 /tlgame/www 目录里面即可访问。\e[0m"
-echo -e "\e[44m 如：http://192.168.66.66:8080 遇到问题可以加群：826717146。\e[0m"
+echo -e "\e[44m 如：http://192.168.66.66:58080 遇到问题可以加群：826717146。\e[0m"
 echo -e "====================================="
 endTime=`date +%s`
 ((outTime=($endTime-$startTime)/60))

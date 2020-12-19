@@ -14,14 +14,14 @@ fi
 tar zxf /root/.tlgame/gs/scripts/billing.tar.gz -C /tlgame/billing/
 
 # 游戏配置文件
-if [ "${TLBBDB_PASSWORD}" != "123456" ]; then
-    sed -i "s/DBPassword=123456/DBPassword=${TLBBDB_PASSWORD}/g" /root/.tlgame/gs/scripts/LoginInfo.ini
-    sed -i "s/DBPassword=123456/DBPassword=${TLBBDB_PASSWORD}/g" /root/.tlgame/gs/scripts/ShareMemInfo.ini
-    sed -i "s/123456/${TLBBDB_PASSWORD}/g" /root/.tlgame/gs/services/server/config/odbc.ini
+if [ "${TL_MYSQL_PASSWORD}" != "123456" ]; then
+    sed -i "s/DBPassword=123456/DBPassword=${TL_MYSQL_PASSWORD}/g" /root/.tlgame/gs/scripts/LoginInfo.ini
+    sed -i "s/DBPassword=123456/DBPassword=${TL_MYSQL_PASSWORD}/g" /root/.tlgame/gs/scripts/ShareMemInfo.ini
+    sed -i "s/123456/${TL_MYSQL_PASSWORD}/g" /root/.tlgame/gs/services/server/config/odbc.ini
 fi
 
-if [ "${WEBDB_PASSWORD}" != "123456" ]; then
-    sed -i "s/123456/${WEBDB_PASSWORD}/g" /root/.tlgame/gs/scripts/config.json
+if [ "${TL_MYSQL_PASSWORD}" != "123456" ]; then
+    sed -i "s/123456/${TL_MYSQL_PASSWORD}/g" /root/.tlgame/gs/scripts/config.json
 fi
 
 #if [ $TLBB_MYSQL_PORT -ne 3306 ]; then
