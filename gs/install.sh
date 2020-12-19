@@ -10,23 +10,109 @@ export PATH
 cur_dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 startTime=`date +%s`
 # 设置服务器时间
-set_clock(){
-    yum -y install ntp
-    \cp -a -r /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-    echo 'Synchronizing system time..'
-    ntpdate 0.asia.pool.ntp.org
-    hwclock -w
+Set_Timezone()
+{
+    Echo_Blue "Setting timezone..."
+    rm -rf /etc/localtime
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 }
+
+# 禁用selinux
+Disable_Selinux()
+{
+    if [ -s /etc/selinux/config ]; then
+        sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
+    fi
+}
+
+# 获取系统安装包组件名称
+Get_Dist_Name()
+{
+    if grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
+        DISTRO='CentOS'
+        PM='yum'
+    elif grep -Eqi "Red Hat Enterprise Linux" /etc/issue || grep -Eq "Red Hat Enterprise Linux" /etc/*-release; then
+        DISTRO='RHEL'
+        PM='yum'
+    elif grep -Eqi "Aliyun" /etc/issue || grep -Eq "Aliyun" /etc/*-release; then
+        DISTRO='Aliyun'
+        PM='yum'
+    elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release; then
+        DISTRO='Fedora'
+        PM='yum'
+    elif grep -Eqi "Amazon Linux" /etc/issue || grep -Eq "Amazon Linux" /etc/*-release; then
+        DISTRO='Amazon'
+        PM='yum'
+    elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
+        DISTRO='Debian'
+        PM='apt'
+    elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
+        DISTRO='Ubuntu'
+        PM='apt'
+    elif grep -Eqi "Raspbian" /etc/issue || grep -Eq "Raspbian" /etc/*-release; then
+        DISTRO='Raspbian'
+        PM='apt'
+    elif grep -Eqi "Deepin" /etc/issue || grep -Eq "Deepin" /etc/*-release; then
+        DISTRO='Deepin'
+        PM='apt'
+    elif grep -Eqi "Mint" /etc/issue || grep -Eq "Mint" /etc/*-release; then
+        DISTRO='Mint'
+        PM='apt'
+    elif grep -Eqi "Kali" /etc/issue || grep -Eq "Kali" /etc/*-release; then
+        DISTRO='Kali'
+        PM='apt'
+    else
+        DISTRO='unknow'
+    fi
+    Get_OS_Bit
+}
+
+# 获取红帽版本
+Get_RHEL_Version()
+{
+    Get_Dist_Name
+    if [ "${DISTRO}" = "RHEL" ]; then
+        if grep -Eqi "release 5." /etc/redhat-release; then
+            echo "Current Version: RHEL Ver 5"
+            RHEL_Ver='5'
+        elif grep -Eqi "release 6." /etc/redhat-release; then
+            echo "Current Version: RHEL Ver 6"
+            RHEL_Ver='6'
+        elif grep -Eqi "release 7." /etc/redhat-release; then
+            echo "Current Version: RHEL Ver 7"
+            RHEL_Ver='7'
+        elif grep -Eqi "release 8." /etc/redhat-release; then
+            echo "Current Version: RHEL Ver 8"
+            RHEL_Ver='8'
+        fi
+    fi
+}
+
+# 修改红帽系统仓库源
+RHEL_Modify_Source()
+{
+    Get_RHEL_Version
+    if [ "${RHELRepo}" = "local" ]; then
+        echo "DO NOT change RHEL repository, use the repository you set."
+    else
+        echo "RHEL ${RHEL_Ver} will use aliyun centos repository..."
+        wget --prefer-family=IPv4 http://mirrors.aliyun.com/repo/Centos-${RHEL_Ver}.repo -O /etc/yum.repos.d/Centos-${RHEL_Ver}.repo
+        yum clean all
+        yum makecache
+    fi
+    sed -i "s/^enabled[ ]*=[ ]*1/enabled=0/" /etc/yum/pluginconf.d/subscription-manager.conf
+}
+
 
 # 更新系统组件与安装必要的安装包
 update_install_plugins() {
-    rm -f /var/run/yum.pid
-    mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
-    mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
-    wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
-    mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-    wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
-    yum makecache
+#    rm -f /var/run/yum.pid
+#    mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
+#    mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
+#    wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+#    mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+#    wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+#    yum makecache
     PLUGINS="dos2unix epel-release yum-utils wget git vim zip unzip zlib zlib-devel freetype freetype-devel lsof pcre pcre-devel crontabs"
     yum -y install ${PLUGINS} && yum -y update
 }
@@ -70,8 +156,62 @@ set_global_var() {
     cat /tmp/gsconfig.txt > /etc/profile.d/gsconfig.sh && rm -rf /tmp/gsconfig.txt && \
     source /etc/profile.d/gsconfig.sh
 }
+
+# 关闭现有安装器
+Kill_PM()
+{
+    if ps aux | grep -E "yum|dnf" | grep -qv "grep"; then
+        kill -9 $(ps -ef|grep -E "yum|dnf"|grep -v grep|awk '{print $2}')
+        if [ -s /var/run/yum.pid ]; then
+            rm -f /var/run/yum.pid
+        fi
+    elif ps aux | grep -E "apt-get|dpkg|apt" | grep -qv "grep"; then
+        kill -9 $(ps -ef|grep -E "apt-get|apt|dpkg"|grep -v grep|awk '{print $2}')
+        if [[ -s /var/lib/dpkg/lock-frontend || -s /var/lib/dpkg/lock ]]; then
+            rm -f /var/lib/dpkg/lock-frontend
+            rm -f /var/lib/dpkg/lock
+            dpkg --configure -a
+        fi
+    fi
+}
+
+# 更新时间
+CentOS_InstallNTP()
+{
+    Echo_Blue "[+] Installing ntp..."
+    yum install -y ntpdate
+    ntpdate -u pool.ntp.org
+    date
+    start_time=$(date +%s)
+}
+
+# 移除系统自带的软件
+CentOS_RemoveAMP()
+{
+    Echo_Blue "[-] Yum remove packages..."
+    rpm -qa|grep httpd
+    rpm -e httpd httpd-tools --nodeps
+    if [[ "${DBSelect}" != "0" ]]; then
+        yum -y remove mysql-server mysql mysql-libs mariadb-server mariadb mariadb-libs
+        rpm -qa|grep mysql
+        if [ $? -ne 0 ]; then
+            rpm -e mysql mysql-libs --nodeps
+            rpm -e mariadb mariadb-libs --nodeps
+        fi
+    fi
+    rpm -qa|grep php
+    rpm -e php-mysql php-cli php-gd php-common php --nodeps
+
+    Remove_Error_Libcurl
+
+    yum -y remove httpd*
+    yum -y remove php*
+    yum clean all
+}
 # 执行操作
-set_clock
+Disable_Selinux
+Set_Timezone
+RHEL_Modify_Source
 update_install_plugins
 docker_ce
 set_command
