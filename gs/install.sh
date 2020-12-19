@@ -9,6 +9,44 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 cur_dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 startTime=`date +%s`
+
+# 获取系统位数，32 位，64 位
+Get_OS_Bit()
+{
+    if [[ `getconf WORD_BIT` = '32' && `getconf LONG_BIT` = '64' ]] ; then
+        Is_64bit='y'
+    else
+        Is_64bit='n'
+    fi
+}
+
+# 字体输出颜色
+Color_Text()
+{
+  echo -e " \e[0;$2m$1\e[0m"
+}
+
+Echo_Red()
+{
+  echo $(Color_Text "$1" "31")
+}
+
+Echo_Green()
+{
+  echo $(Color_Text "$1" "32")
+}
+
+Echo_Yellow()
+{
+  echo $(Color_Text "$1" "33")
+}
+
+Echo_Blue()
+{
+  echo $(Color_Text "$1" "34")
+}
+
+
 # 设置服务器时间
 Set_Timezone()
 {
