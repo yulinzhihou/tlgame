@@ -1,4 +1,4 @@
-FROM mysql:5.7
+FROM registry.cn-hangzhou.aliyuncs.com/yulinzhihou/gs_tlmysql:v0.1
 MAINTAINER yulinzhihou "yulinzhihou@gmail.com"
 COPY ./initdb.d/*.sql /docker-entrypoint-initdb.d/
 COPY ./config/* /tmp/
