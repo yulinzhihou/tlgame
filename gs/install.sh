@@ -5,41 +5,14 @@
 # 项目地址：https://github.com/yulinzhihou/tlgame.git
 # 项目地址：https://gitee.com/yulinzhihou/tlgame.git
 # 如果觉得写得有点点用，请麻烦点个 star
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
-export PATH
+export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+
 cur_dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 startTime=`date +%s`
 
 . scripts/main.sh
 
 Get_Dist_Name
-
-# 字体输出颜色
-Color_Text()
-{
-  echo -e " \e[0;$2m$1\e[0m"
-}
-
-Echo_Red()
-{
-  echo $(Color_Text "$1" "31")
-}
-
-Echo_Green()
-{
-  echo $(Color_Text "$1" "32")
-}
-
-Echo_Yellow()
-{
-  echo $(Color_Text "$1" "33")
-}
-
-Echo_Blue()
-{
-  echo $(Color_Text "$1" "34")
-}
-
 
 # 设置服务器时间
 Set_Timezone()

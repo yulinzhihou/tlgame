@@ -6,6 +6,41 @@
 # 项目地址：https://gitee.com/yulinzhihou/tlgame.git
 # 如果觉得写得有点点用，请麻烦点个 star
 
+# 字体输出颜色
+Color_Text()
+{
+  echo -e " \e[0;$2m$1\e[0m"
+}
+
+Echo_Red()
+{
+  echo $(Color_Text "$1" "31")
+}
+
+Echo_Green()
+{
+  echo $(Color_Text "$1" "32")
+}
+
+Echo_Yellow()
+{
+  echo $(Color_Text "$1" "33")
+}
+
+Echo_Blue()
+{
+  echo $(Color_Text "$1" "34")
+}
+
+Get_OS_Bit()
+{
+    if [[ `getconf WORD_BIT` = '32' && `getconf LONG_BIT` = '64' ]] ; then
+        Is_64bit='y'
+    else
+        Is_64bit='n'
+    fi
+}
+
 Get_Dist_Version()
 {
     if command -v lsb_release >/dev/null 2>&1; then
@@ -88,14 +123,5 @@ Get_RHEL_Version()
             echo "Current Version: RHEL Ver 8"
             RHEL_Ver='8'
         fi
-    fi
-}
-
-Get_OS_Bit()
-{
-    if [[ `getconf WORD_BIT` = '32' && `getconf LONG_BIT` = '64' ]] ; then
-        Is_64bit='y'
-    else
-        Is_64bit='n'
     fi
 }
