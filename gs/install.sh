@@ -13,6 +13,7 @@ startTime=`date +%s`
 . scripts/main.sh
 
 Get_Dist_Name
+Get_RHEL_Version
 
 if [ "${RHEL_Ver}" = "5" ]; or [ ${RHEL_Ver} = "6" ]; then
   echo "此系统版本太低了，不合适本环境 ，请升级到linux3.18内核，或者安装CentOS7/RHEL7 以上!!";
