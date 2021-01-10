@@ -10,14 +10,6 @@ export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~
 cur_dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 startTime=`date +%s`
 
-#!/usr/bin/env bash
-# author: yulinzhihou
-# mail: yulinzhihou@gmail.com
-# date: 2021-01-08
-# 项目地址：https://github.com/yulinzhihou/tlgame.git
-# 项目地址：https://gitee.com/yulinzhihou/tlgame.git
-# 如果觉得写得有点点用，请麻烦点个 star
-
 # 字体输出颜色
 Color_Text()
 {
@@ -208,8 +200,18 @@ update_install_plugins() {
 
 # 配置与安装Docker-ce
 docker_ce() {
-    sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-    sudo yum makecache fast && sudo yum -y install docker-ce docker-compose && systemctl enable docker && sudo systemctl start docker
+    if [ "${RHEL_Ver}" = '8' ]; then
+        curl https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
+        yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm
+        sudo yum -y install docker && systemctl enable docker && sudo systemctl start docker
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    else
+        sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+        sudo yum makecache fast && sudo yum -y install docker-ce docker-compose && systemctl enable docker && sudo systemctl start docker
+    fi
+
     sudo mkdir -p /etc/docker
     sudo tee /etc/docker/daemon.json << EOF
 {
