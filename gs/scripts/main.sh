@@ -123,5 +123,20 @@ Get_RHEL_Version()
             echo "Current Version: RHEL Ver 8"
             RHEL_Ver='8'
         fi
+    elif [ "${DISTRO}" = "CentOS" ]; then
+        if grep -Eqi "release 5." /etc/centos-release; then
+            echo "Current Version: CentOS Ver 5"
+            RHEL_Ver='5'
+        elif grep -Eqi "release 6." /etc/centos-release; then
+            echo "Current Version: CentOS Ver 6"
+            RHEL_Ver='6'
+        elif grep -Eqi "release 7." /etc/centos-release; then
+            echo "Current Version: CentOS Ver 7"
+            RHEL_Ver='7'
+        elif grep -Eqi "release 8." /etc/centos-release; then
+            echo "Current Version: CentOS Ver 8"
+            RHEL_Ver='8'
+        fi
+
     fi
 }
