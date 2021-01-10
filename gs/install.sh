@@ -10,12 +10,153 @@ export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~
 cur_dir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 startTime=`date +%s`
 
-. scripts/main.sh
+#!/usr/bin/env bash
+# author: yulinzhihou
+# mail: yulinzhihou@gmail.com
+# date: 2021-01-08
+# 项目地址：https://github.com/yulinzhihou/tlgame.git
+# 项目地址：https://gitee.com/yulinzhihou/tlgame.git
+# 如果觉得写得有点点用，请麻烦点个 star
 
+# 字体输出颜色
+Color_Text()
+{
+  echo -e " \e[0;$2m$1\e[0m"
+}
+
+Echo_Red()
+{
+  echo $(Color_Text "$1" "31")
+}
+
+Echo_Green()
+{
+  echo $(Color_Text "$1" "32")
+}
+
+Echo_Yellow()
+{
+  echo $(Color_Text "$1" "33")
+}
+
+Echo_Blue()
+{
+  echo $(Color_Text "$1" "34")
+}
+
+Get_OS_Bit()
+{
+    if [[ `getconf WORD_BIT` = '32' && `getconf LONG_BIT` = '64' ]] ; then
+        Is_64bit='y'
+    else
+        Is_64bit='n'
+    fi
+}
+
+Get_Dist_Version()
+{
+    if command -v lsb_release >/dev/null 2>&1; then
+        DISTRO_Version=$(lsb_release -sr)
+    elif [ -f /etc/lsb-release ]; then
+        . /etc/lsb-release
+        DISTRO_Version="$DISTRIB_RELEASE"
+    elif [ -f /etc/os-release ]; then
+        . /etc/os-release
+        DISTRO_Version="$VERSION_ID"
+    fi
+    if [[ "${DISTRO}" = "" || "${DISTRO_Version}" = "" ]]; then
+        if command -v python2 >/dev/null 2>&1; then
+            DISTRO_Version=$(python2 -c 'import platform; print platform.linux_distribution()[1]')
+        elif command -v python3 >/dev/null 2>&1; then
+            DISTRO_Version=$(python3 -c 'import platform; print(platform.linux_distribution()[1])')
+        else
+            Install_LSB
+            DISTRO_Version=`lsb_release -rs`
+        fi
+    fi
+    printf -v "${DISTRO}_Version" '%s' "${DISTRO_Version}"
+}
+
+Get_Dist_Name()
+{
+    if grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
+        DISTRO='CentOS'
+        PM='yum'
+    elif grep -Eqi "Red Hat Enterprise Linux" /etc/issue || grep -Eq "Red Hat Enterprise Linux" /etc/*-release; then
+        DISTRO='RHEL'
+        PM='yum'
+    elif grep -Eqi "Aliyun" /etc/issue || grep -Eq "Aliyun" /etc/*-release; then
+        DISTRO='Aliyun'
+        PM='yum'
+    elif grep -Eqi "Fedora" /etc/issue || grep -Eq "Fedora" /etc/*-release; then
+        DISTRO='Fedora'
+        PM='yum'
+    elif grep -Eqi "Amazon Linux" /etc/issue || grep -Eq "Amazon Linux" /etc/*-release; then
+        DISTRO='Amazon'
+        PM='yum'
+    elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
+        DISTRO='Debian'
+        PM='apt'
+    elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
+        DISTRO='Ubuntu'
+        PM='apt'
+    elif grep -Eqi "Raspbian" /etc/issue || grep -Eq "Raspbian" /etc/*-release; then
+        DISTRO='Raspbian'
+        PM='apt'
+    elif grep -Eqi "Deepin" /etc/issue || grep -Eq "Deepin" /etc/*-release; then
+        DISTRO='Deepin'
+        PM='apt'
+    elif grep -Eqi "Mint" /etc/issue || grep -Eq "Mint" /etc/*-release; then
+        DISTRO='Mint'
+        PM='apt'
+    elif grep -Eqi "Kali" /etc/issue || grep -Eq "Kali" /etc/*-release; then
+        DISTRO='Kali'
+        PM='apt'
+    else
+        DISTRO='unknow'
+    fi
+    Get_OS_Bit
+}
+
+Get_RHEL_Version()
+{
+    Get_Dist_Name
+    if [ "${DISTRO}" = "RHEL" ]; then
+        if grep -Eqi "release 5." /etc/redhat-release; then
+            echo "Current Version: RHEL Ver 5"
+            RHEL_Ver='5'
+        elif grep -Eqi "release 6." /etc/redhat-release; then
+            echo "Current Version: RHEL Ver 6"
+            RHEL_Ver='6'
+        elif grep -Eqi "release 7." /etc/redhat-release; then
+            echo "Current Version: RHEL Ver 7"
+            RHEL_Ver='7'
+        elif grep -Eqi "release 8." /etc/redhat-release; then
+            echo "Current Version: RHEL Ver 8"
+            RHEL_Ver='8'
+        fi
+    elif [ "${DISTRO}" = "CentOS" ]; then
+        if grep -Eqi "release 5." /etc/centos-release; then
+            echo "Current Version: CentOS Ver 5"
+            RHEL_Ver='5'
+        elif grep -Eqi "release 6." /etc/centos-release; then
+            echo "Current Version: CentOS Ver 6"
+            RHEL_Ver='6'
+        elif grep -Eqi "release 7." /etc/centos-release; then
+            echo "Current Version: CentOS Ver 7"
+            RHEL_Ver='7'
+        elif grep -Eqi "release 8." /etc/centos-release; then
+            echo "Current Version: CentOS Ver 8"
+            RHEL_Ver='8'
+        fi
+
+    fi
+}
 Get_Dist_Name
+
 Get_RHEL_Version
 
-if [ "${RHEL_Ver}" = "5" ]; or [ ${RHEL_Ver} = "6" ]; then
+if [ "${RHEL_Ver}" = "5" ] || [ ${RHEL_Ver} = "6" ]; then
   echo "此系统版本太低了，不合适本环境 ，请升级到linux3.18内核，或者安装CentOS7/RHEL7 以上!!";
   exit 1;
 fi
@@ -39,7 +180,7 @@ Disable_Selinux()
 # 修改红帽系统仓库源
 RHEL_Modify_Source()
 {
-    Get_RHEL_Version
+#    Get_RHEL_Version
     if [ "${RHELRepo}" = "local" ]; then
         echo "DO NOT change RHEL repository, use the repository you set."
     else
@@ -133,31 +274,9 @@ CentOS_InstallNTP()
     start_time=$(date +%s)
 }
 
-# 移除系统自带的软件
-CentOS_RemoveAMP()
-{
-    Echo_Blue "[-] Yum remove packages..."
-    rpm -qa|grep httpd
-    rpm -e httpd httpd-tools --nodeps
-    if [[ "${DBSelect}" != "0" ]]; then
-        yum -y remove mysql-server mysql mysql-libs mariadb-server mariadb mariadb-libs
-        rpm -qa|grep mysql
-        if [ $? -ne 0 ]; then
-            rpm -e mysql mysql-libs --nodeps
-            rpm -e mariadb mariadb-libs --nodeps
-        fi
-    fi
-    rpm -qa|grep php
-    rpm -e php-mysql php-cli php-gd php-common php --nodeps
 
-    Remove_Error_Libcurl
-
-    yum -y remove httpd*
-    yum -y remove php*
-    yum clean all
-}
 # 执行操作
-Get_Dist_Version
+
 RHEL_Modify_Source
 Disable_Selinux
 Set_Timezone

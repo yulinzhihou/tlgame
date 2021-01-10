@@ -140,3 +140,6 @@ Get_RHEL_Version()
 
     fi
 }
+Get_Dist_Name
+
+Get_RHEL_Version
