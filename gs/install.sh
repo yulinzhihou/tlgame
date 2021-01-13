@@ -201,10 +201,10 @@ update_install_plugins() {
 # 配置与安装Docker-ce
 docker_ce() {
     if [ "${RHEL_Ver}" = '8' ]; then
-        curl https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
-        yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm
-        sudo yum -y install docker && systemctl enable docker && sudo systemctl start docker
-        mv ./scripts/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+        curl https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
+        rpm -ivh /root/.tlgame/gs/scripts/containerd.io-1.2.6-3.3.fc30.x86_64.rpm
+#        sudo yum -y install docker && systemctl enable docker && sudo systemctl start docker
+        mv /root/.tlgame/gs/scripts/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
         sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     else
