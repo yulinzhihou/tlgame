@@ -202,9 +202,11 @@ update_install_plugins() {
 docker_ce() {
     if [ "${RHEL_Ver}" = '8' ]; then
         curl https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
-        rpm -ivh /root/.tlgame/gs/scripts/containerd.io-1.2.6-3.3.fc30.x86_64.rpm
-#        sudo yum -y install docker && systemctl enable docker && sudo systemctl start docker
-        mv /root/.tlgame/gs/scripts/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+        yum -y install https://mirrors.aliyun.com/fedora/development/rawhide/Everything/x86_64/os/Packages/c/containerd-1.4.3-1.fc34.x86_64.rpm
+#       yum -y install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm
+#       sudo yum -y install docker && systemctl enable docker && sudo systemctl start docker
+#       mv /root/.tlgame/gs/scripts/docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+        yum -y install https://mirrors.aliyun.com/fedora/development/rawhide/Everything/aarch64/os/Packages/d/docker-compose-1.27.4-1.fc34.noarch.rpm
         sudo chmod +x /usr/local/bin/docker-compose
         sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     else
